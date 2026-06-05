@@ -1,19 +1,29 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop, Home as HomeIcon, PawPrint, Pill, ShoppingCart, ArrowRight, ShieldCheck, Star, Calendar, Clock, Map, Building } from 'lucide-react'
+import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop, Home as HomeIcon, PawPrint, Pill, ShoppingCart, ArrowRight, ShieldCheck, Star, Calendar, Clock, Map, Building, Scissors, ShoppingBag, GraduationCap, Camera, Music, Dumbbell, Hammer, Briefcase, MoreHorizontal, Stethoscope } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { registrarEvento } from '../../lib/analytics'
 import { getTenantFromURL } from '../../lib/tenant'
 
 const CATEGORIAS = [
   { nome: 'Alimentação', slug: 'alimentacao', icone: Utensils, cor: 'text-orange-500 bg-orange-50' },
-  { nome: 'Saúde', slug: 'saude-beleza', icone: Heart, cor: 'text-rose-500 bg-rose-50' },
+  { nome: 'Beleza e Estética', slug: 'beleza', icone: Scissors, cor: 'text-pink-500 bg-pink-50' },
   { nome: 'Automotivo', slug: 'automotivo', icone: Car, cor: 'text-blue-500 bg-blue-50' },
-  { nome: 'Comércio', slug: 'comercio', icone: ShoppingCart, cor: 'text-emerald-500 bg-emerald-50' },
-  { nome: 'Jurídico', slug: 'juridico', icone: Book, cor: 'text-indigo-500 bg-indigo-50' },
-  { nome: 'Disk Gás', slug: 'gas', icone: Zap, cor: 'text-yellow-500 bg-yellow-50' },
-  { nome: 'Beleza', slug: 'beleza', icone: Sparkles, cor: 'text-pink-500 bg-pink-50' },
-  { nome: 'Pet Shop', slug: 'pet', icone: PawPrint, cor: 'text-purple-500 bg-purple-50' },
+  { nome: 'Moda', slug: 'moda', icone: ShoppingBag, cor: 'text-purple-500 bg-purple-50' },
+  { nome: 'Saúde', slug: 'saude', icone: Heart, cor: 'text-rose-500 bg-rose-50' },
+  { nome: 'Educação', slug: 'educacao', icone: GraduationCap, cor: 'text-emerald-500 bg-emerald-50' },
+  { nome: 'Casa e Decoração', slug: 'casa', icone: HomeIcon, cor: 'text-amber-500 bg-amber-50' },
+  { nome: 'Serviços Gerais', slug: 'servicos', icone: Wrench, cor: 'text-slate-500 bg-slate-50' },
+  { nome: 'Fotografia', slug: 'fotografia', icone: Camera, cor: 'text-indigo-500 bg-indigo-50' },
+  { nome: 'Música', slug: 'musica', icone: Music, cor: 'text-fuchsia-500 bg-fuchsia-50' },
+  { nome: 'Pet Shop', slug: 'pet', icone: PawPrint, cor: 'text-lime-500 bg-lime-50' },
+  { nome: 'Esportes', slug: 'esportes', icone: Dumbbell, cor: 'text-teal-500 bg-teal-50' },
+  { nome: 'Construção', slug: 'construcao', icone: Hammer, cor: 'text-yellow-500 bg-yellow-50' },
+  { nome: 'Tecnologia', slug: 'tecnologia', icone: Laptop, cor: 'text-cyan-500 bg-cyan-50' },
+  { nome: 'Consultoria', slug: 'consultoria', icone: Briefcase, cor: 'text-blue-600 bg-blue-50' },
+  { nome: 'Salão de Beleza', slug: 'salao', icone: Sparkles, cor: 'text-pink-400 bg-pink-50' },
+  { nome: 'Veterinária', slug: 'veterinaria', icone: Stethoscope, cor: 'text-emerald-600 bg-emerald-50' },
+  { nome: 'Outros', slug: 'outros', icone: MoreHorizontal, cor: 'text-gray-500 bg-gray-50' },
 ]
 
 function Sparkles(props: any) {
@@ -338,20 +348,19 @@ export default function Home() {
             Encontre rapidamente o que você precisa
           </p>
 
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-[10px] max-w-5xl mx-auto">
+          <div className="grid grid-cols-4 md:grid-cols-9 gap-[10px] max-w-[1200px] mx-auto">
             {CATEGORIAS.map((cat, idx) => {
               const Icon = cat.icone
               return (
                 <Link
                   key={idx}
                   to={`/busca?categoria=${cat.slug}`}
-                  className="group flex flex-col items-center justify-center p-4 md:p-5 bg-white border-[1.5px] border-[#EEF3F8] rounded-[12px] hover:border-[#1A9B6A] hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(26,155,106,0.1)] transition-all duration-300"
+                  className="group flex flex-col items-center justify-center p-4 bg-white border-[1.5px] border-[#EEF3F8] rounded-[16px] hover:border-[#1A9B6A] hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(26,155,106,0.1)] transition-all duration-300"
                 >
-                  <div className={`w-10 h-10 rounded-[10px] ${cat.cor} flex items-center justify-center mb-3`}>
-                    <Icon className="w-5 h-5" />
+                  <div className={`w-12 h-12 rounded-[14px] ${cat.cor} flex items-center justify-center mb-3`}>
+                    <Icon className="w-6 h-6" strokeWidth={1.5} />
                   </div>
-                  <h3 className="font-bold text-[#0A1628] text-[13px] group-hover:text-[#1A9B6A] transition-colors leading-tight mb-1">{cat.nome}</h3>
-                  <span className="text-[11px] text-[#9AAAB8]">{Math.floor(Math.random()*20)+2} empresas</span>
+                  <h3 className="font-semibold text-[#0A1628] text-[12px] text-center group-hover:text-[#1A9B6A] transition-colors leading-tight">{cat.nome}</h3>
                 </Link>
               )
             })}
@@ -580,7 +589,7 @@ export default function Home() {
               <ul className="space-y-3 text-[14px] font-medium">
                 <li><Link to="/cadastre-sua-empresa" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Anunciar Negócio</Link></li>
                 <li><Link to="/seja-parceiro" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Seja um Parceiro</Link></li>
-                <li><Link to="/planos" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Planos e Preços</Link></li>
+
                 <li><Link to="/seja-parceiro" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Programa de Parceiros</Link></li>
               </ul>
             </div>
