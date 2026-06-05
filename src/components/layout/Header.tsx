@@ -32,7 +32,6 @@ export function Header() {
     { to: "/", label: "Início" },
     { to: "/busca", label: "Buscar Empresas" },
     { to: "/cadastro", label: "Cadastrar Empresa" },
-    { to: "/planos", label: "Planos" },
     { to: "/blog", label: "Blog" },
     { to: "/parceiros", label: "Parceiros" },
     { to: "/sobre", label: "Sobre" },

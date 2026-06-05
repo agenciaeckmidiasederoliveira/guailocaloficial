@@ -4,6 +4,7 @@ import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop,
 import { supabase } from '../../lib/supabase'
 import { registrarEvento } from '../../lib/analytics'
 import { getTenantFromURL } from '../../lib/tenant'
+import { EmpresaCard } from '../../components/empresas/EmpresaCard'
 
 const CATEGORIAS = [
   { nome: 'Alimentação', slug: 'alimentacao', icone: Utensils, cor: 'text-orange-500 bg-orange-50' },
@@ -383,34 +384,14 @@ export default function Home() {
           <div className="relative overflow-hidden w-full group">
             <div className="flex w-max gap-5 animate-[marquee_40s_linear_infinite] hover:[animation-play-state:paused] pb-4">
               {[...empresasDestaque, ...empresasDestaque].map((empresa, idx) => {
-                const bgColors = ['bg-emerald-50', 'bg-orange-50', 'bg-blue-50', 'bg-purple-50', 'bg-pink-50']
-                const textColors = ['text-emerald-500', 'text-orange-500', 'text-blue-500', 'text-purple-500', 'text-pink-500']
-                const colorIdx = idx % bgColors.length;
-                
+                const mappedEmpresa = {
+                  ...empresa,
+                  cidade: empresa?.cidades?.nome || '',
+                  estado: empresa?.cidades?.estados?.uf || ''
+                };
                 return (
-                  <div key={idx} className="w-[280px] flex-shrink-0 bg-white border-[1.5px] border-[#EEF3F8] rounded-[16px] overflow-hidden hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all flex flex-col">
-                    <div className={`h-28 w-full ${bgColors[colorIdx]} flex items-center justify-center relative`}>
-                      <div className="absolute top-3 left-3 bg-[#FF9800] text-white text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md">
-                        Destaque
-                      </div>
-                      {empresa?.foto_principal ? (
-                        <img src={empresa.foto_principal} className="w-full h-full object-cover opacity-90" alt="" />
-                      ) : (
-                        <Building className={`w-10 h-10 ${textColors[colorIdx]} opacity-50`} />
-                      )}
-                    </div>
-                    <div className="p-4 flex-1 flex flex-col">
-                      <h3 className="font-bold text-[#0A1628] text-[15px] leading-tight mb-1 line-clamp-1">{empresa?.nome || 'Nome da Empresa'}</h3>
-                      <div className="flex items-center text-[12px] text-[#9AAAB8] mb-3">
-                        <MapPin className="w-3 h-3 mr-1" /> {empresa?.cidades?.nome || 'Cidade'}, {empresa?.cidades?.estados?.uf || 'UF'}
-                      </div>
-                      <div className="flex gap-1 mb-4">
-                        {[1,2,3,4,5].map(s => <Star key={s} className="w-3 h-3 fill-[#FBBF24] text-[#FBBF24]" />)}
-                      </div>
-                      <button onClick={() => navigate(`/empresa/${empresa?.slug}`)} className="mt-auto w-full bg-[#25D366] text-white text-[13px] font-bold py-2.5 rounded-xl hover:bg-[#20bd5a] transition-colors cursor-pointer">
-                        WhatsApp
-                      </button>
-                    </div>
+                  <div key={idx} className="w-[280px] flex-shrink-0">
+                    <EmpresaCard empresa={mappedEmpresa as any} />
                   </div>
                 )
               })}

@@ -32,3 +32,4 @@ fix_rls.js
 migrar.js
 set_admin.js
 test*.js
+.vercel

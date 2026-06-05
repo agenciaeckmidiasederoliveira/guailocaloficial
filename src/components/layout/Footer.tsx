@@ -36,7 +36,6 @@ const quickLinks = [
   { to: "/contato", label: "Contato" },
   { to: "/privacidade", label: "Política de Privacidade" },
   { to: "/termos", label: "Termos de Uso" },
-  { to: "/templates/GuiaLocalBR_Template_Importacao.xlsx", label: "Baixar Planilha Modelo (.xlsx)", external: true },
 ];
 
 const cidadesPopulares = [
