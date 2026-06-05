@@ -30,8 +30,11 @@ function TrocaSenhaModal({ onDone }: { onDone: () => void }) {
     setLoading(true)
     const { error } = await supabase.auth.updateUser({ password: nova })
     if (error) { setErro(error.message); setLoading(false); return }
-    // Marcar no perfil que já trocou a senha
-    await supabase.from('profiles').update({ deve_trocar_senha: false }).eq('id', (await supabase.auth.getUser()).data.user?.id)
+    // Marcar no user_metadata que já trocou a senha
+    await supabase.auth.updateUser({ data: { force_password_reset: false } })
+    if (profile?.id) {
+      await supabase.from('profiles').update({ deve_trocar_senha: false }).eq('id', profile.id)
+    }
     onDone()
   }
 
@@ -99,9 +102,11 @@ export default function LayoutParceiro() {
     if (profile?.id) {
       carregarParceiro()
       // Checar se precisa trocar senha
-      setDeveTrocar(!!profile?.deve_trocar_senha)
+      const forceFromMeta = session?.user?.user_metadata?.force_password_reset === true;
+      const forceFromProfile = !!profile?.deve_trocar_senha;
+      setDeveTrocar(forceFromMeta || forceFromProfile);
     }
-  }, [profile])
+  }, [profile, session])
 
   const carregarParceiro = async () => {
     const { data } = await supabase
