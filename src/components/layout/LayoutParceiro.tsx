@@ -13,7 +13,6 @@ const MENU = [
   { label: 'Território / Cidades', path: '/parceiro/cidades', icon: MapPin },
   { label: 'Leads Recebidos', path: '/parceiro/leads', icon: PhoneIncoming },
   { label: 'Analytics', path: '/parceiro/analytics', icon: BarChart2 },
-  { label: 'Blog & IA', path: '/parceiro/blog', icon: PenTool },
   { label: 'Configurações', path: '/parceiro/configuracoes', icon: Settings },
 ]
 
