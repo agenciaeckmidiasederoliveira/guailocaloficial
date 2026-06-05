@@ -1,0 +1,2 @@
+ALTER TABLE public.empresas ADD COLUMN IF NOT EXISTS data_expiracao_destaque timestamptz;
+CREATE INDEX IF NOT EXISTS idx_empresas_destaque_expira ON public.empresas (data_expiracao_destaque) WHERE destaque_rotacao = true OR destaque_banner = true;

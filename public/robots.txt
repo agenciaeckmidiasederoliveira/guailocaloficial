@@ -1,0 +1,15 @@
+# https://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /parceiro
+Disallow: /parceiro/
+Disallow: /area-parceiro
+Disallow: /area-parceiro/
+Disallow: /auth
+Disallow: /login
+Disallow: /reset-password
+
+Sitemap: https://guialocalbr.com.br/sitemap.xml

@@ -1,0 +1,1 @@
+ALTER TABLE public.empresas ADD COLUMN redes_sociais jsonb DEFAULT '[]'::jsonb;

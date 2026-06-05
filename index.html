@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Guia Local BR - Conecte-se aos Melhores Negócios Locais</title>
+    <meta name="description" content="O Guia Local BR é a plataforma premium para encontrar e promover negócios locais em todo o Brasil. Cadastre sua empresa e alcance milhares de clientes na sua região." />
+    <meta name="author" content="Eder Oliveira Digital" />
+    <meta name="keywords" content="guia local, negócios locais, empresas, diretório, brasil, cadastro empresas, marketing local" />
+    <link rel="canonical" href="https://guialocalbr.com.br" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1e3a5f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Guia Local BR" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- PWA Icons -->
+    <link rel="apple-touch-icon" href="/logotipo.png" />
+    <link rel="icon" type="image/png" href="/logotipo.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Guia Local BR - Conecte-se aos Melhores Negócios Locais" />
+    <meta property="og:description" content="A plataforma premium para encontrar e promover negócios locais em todo o Brasil." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://guialocalbr.com.br" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:image" content="/logotipo.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Guia Local BR - Conecte-se aos Melhores Negócios Locais" />
+    <meta name="twitter:description" content="A plataforma premium para encontrar e promover negócios locais em todo o Brasil." />
+    <meta name="twitter:image" content="/logotipo.png" />
+
+    <!-- Preconnect: Supabase (backend crítico) e Fonts -->
+    <link rel="preconnect" href="https://cogcidjnhnjlgvmbbgab.supabase.co" crossorigin>
+    <link rel="dns-prefetch" href="https://cogcidjnhnjlgvmbbgab.supabase.co">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Guia Local BR",
+      "url": "https://guialocalbr.com.br",
+      "description": "Conecte-se aos melhores negócios locais do Brasil",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://guialocalbr.com.br/busca?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- Remove Service Workers antigos que travavam links mobile/in-app browsers -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.getRegistrations()
+            .then((registrations) => Promise.all(registrations.map((registration) => registration.unregister())))
+            .catch(() => undefined);
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

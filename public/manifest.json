@@ -1,0 +1,38 @@
+{
+  "name": "Guia Local BR - Conecte-se aos Melhores Negócios",
+  "short_name": "Guia Local",
+  "description": "A plataforma premium para encontrar e promover negócios locais em todo o Brasil",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e3a5f",
+  "theme_color": "#1e3a5f",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "pt-BR",
+  "categories": ["business", "lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "/logotipo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Buscar Empresas",
+      "short_name": "Buscar",
+      "description": "Encontre negócios locais",
+      "url": "/busca",
+      "icons": [{ "src": "/logotipo.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "Cadastrar Empresa",
+      "short_name": "Cadastrar",
+      "description": "Cadastre seu negócio",
+      "url": "/cadastro",
+      "icons": [{ "src": "/logotipo.png", "sizes": "512x512" }]
+    }
+  ]
+}
