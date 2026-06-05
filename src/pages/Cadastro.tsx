@@ -41,6 +41,7 @@ export default function Cadastro() {
   const [endereco, setEndereco] = useState("");
   const [cidade, setCidade] = useState("");
   const [estado, setEstado] = useState("");
+  const [cidadesIBGE, setCidadesIBGE] = useState<{nome: string}[]>([]);
   const [telefone, setTelefone] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [site, setSite] = useState("");
@@ -58,6 +59,24 @@ export default function Cadastro() {
   const [fotoPrincipalPreview, setFotoPrincipalPreview] = useState<string>("");
   const [fotosAdicionais, setFotosAdicionais] = useState<File[]>([]);
   const [fotosAdicionaisPreview, setFotosAdicionaisPreview] = useState<string[]>([]);
+  const [parceiroLocal, setParceiroLocal] = useState<{nome: string, whatsapp: string} | null>(null);
+
+  const [fotosAdicionaisPreview, setFotosAdicionaisPreview] = useState<string[]>([]);
+
+  // Buscar cidades do IBGE quando mudar estado
+  useEffect(() => {
+    if (estado) {
+      fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/municipios`)
+        .then(res => res.json())
+        .then(data => {
+          setCidadesIBGE(data);
+          setCidade(""); // reseta cidade ao mudar estado
+        })
+        .catch(() => setCidadesIBGE([]));
+    } else {
+      setCidadesIBGE([]);
+    }
+  }, [estado]);
 
   // Fetch premium count and individual quota for partners
   useEffect(() => {
@@ -83,10 +102,32 @@ export default function Cadastro() {
     }
   }, [user, authLoading, navigate]);
 
-  // Garante que parceiro sempre vê o plano Premium pré-selecionado (cortesia)
+  // Garante que o plano padrão seja GRÁTIS para usuários comuns, Premium para parceiros
   useEffect(() => {
-    if (isParceiro) setPlano("premium");
+    setPlano(isParceiro ? "premium" : "free");
   }, [isParceiro]);
+
+  // Checar se há um parceiro para a cidade selecionada
+  useEffect(() => {
+    if (cidade && estado) {
+      const searchCity = `${cidade} - ${estado}`;
+      supabase.from("parceiros").select("nome, whatsapp, cidades_atendidas").then(({ data }) => {
+        if (data) {
+          const parceiro = data.find(p => {
+            const cidades = Array.isArray(p.cidades_atendidas) ? p.cidades_atendidas : [];
+            return cidades.some((c: any) => c.nome === cidade && c.estado === estado);
+          });
+          if (parceiro && parceiro.whatsapp) {
+            setParceiroLocal({ nome: parceiro.nome || "Parceiro Autorizado", whatsapp: parceiro.whatsapp });
+          } else {
+            setParceiroLocal(null);
+          }
+        }
+      });
+    } else {
+      setParceiroLocal(null);
+    }
+  }, [cidade, estado]);
 
   const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -463,8 +504,7 @@ export default function Cadastro() {
             </ol>
           </div>
 
-          <div className={step === 1 ? "space-y-8" : "hidden"}>
-          {/* Plan Selection */}
+          {/* Mensagem Premium Removida (já é default gratis para usuário, premium pra parceiro) */}
           {isParceiro && (
             <div className="rounded-lg border border-amber-500/30 bg-amber-50/50 p-4 dark:bg-amber-950/20">
               <div className="flex items-start gap-2 text-sm">
@@ -479,62 +519,49 @@ export default function Cadastro() {
               </div>
             </div>
           )}
-          <Card>
-            <CardHeader>
-              <CardTitle>Escolha seu Plano</CardTitle>
-              <CardDescription>
-                Selecione o plano ideal para o seu negócio
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RadioGroup
-                value={plano}
-                onValueChange={(v) => setPlano(v as "free" | "premium")}
-                className="grid gap-4 md:grid-cols-2"
-              >
-                <Label
-                  htmlFor="free"
-                  className={`cursor-pointer rounded-lg border-2 p-4 transition-all ${
-                    plano === "free" ? "border-primary bg-primary/5" : "border-border"
-                  }`}
-                >
-                  <RadioGroupItem value="free" id="free" className="sr-only" />
-                  <div className="flex items-center justify-between">
-                    <span className="font-semibold">Grátis</span>
-                    {plano === "free" && <Check className="h-5 w-5 text-primary" />}
-                  </div>
-                  <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-                    <li>• 1 foto</li>
-                    <li>• Informações básicas</li>
-                    <li>• Listagem padrão</li>
-                  </ul>
-                </Label>
 
-                <Label
-                  htmlFor="premium"
-                  className={`cursor-pointer rounded-lg border-2 p-4 transition-all ${
-                    plano === "premium" ? "border-secondary bg-secondary/5" : "border-border"
-                  }`}
-                >
-                  <RadioGroupItem value="premium" id="premium" className="sr-only" />
-                  <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-2 font-semibold">
-                      <Crown className="h-4 w-4 text-amber-500" />
-                      Premium
-                    </span>
-                    {plano === "premium" && <Check className="h-5 w-5 text-secondary" />}
-                  </div>
-                  <ul className="mt-3 space-y-1 text-sm text-muted-foreground">
-                    <li>• Até 10 fotos</li>
-                    <li>• 2 vídeos</li>
-                    <li>• Link do site</li>
-                    <li>• Destaque na busca</li>
-                    <li>• Descrição SEO</li>
-                  </ul>
-                </Label>
-              </RadioGroup>
-            </CardContent>
-          </Card>
+          {!isParceiro && (
+            <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
+              <div className="flex items-start gap-2 text-sm">
+                <div className="flex-1">
+                  <span className="font-medium">Seu cadastro será Gratuito</span>
+                  <p className="text-muted-foreground mt-1">
+                    Você está criando um cadastro gratuito com informações básicas e 1 foto.
+                  </p>
+                  {parceiroLocal ? (
+                    <div className="mt-3 p-3 bg-white dark:bg-slate-900 rounded-md border border-amber-200">
+                      <p className="font-semibold text-amber-600 flex items-center gap-1 mb-2">
+                        <Crown className="w-4 h-4" /> Quer ter um plano Premium ou Banner?
+                      </p>
+                      <p className="text-muted-foreground text-xs mb-3">
+                        Para recursos premium, fale com o parceiro exclusivo da sua cidade.
+                      </p>
+                      <Button asChild size="sm" className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full sm:w-auto">
+                        <a href={`https://wa.me/55${parceiroLocal.whatsapp.replace(/\D/g, '')}?text=Olá ${parceiroLocal.nome}, gostaria de saber sobre o plano Premium do Guia Local!`} target="_blank" rel="noopener noreferrer">
+                          Falar com {parceiroLocal.nome} no WhatsApp
+                        </a>
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="mt-3 p-3 bg-white dark:bg-slate-900 rounded-md border border-amber-200">
+                      <p className="font-semibold text-amber-600 flex items-center gap-1 mb-2">
+                        <Crown className="w-4 h-4" /> Quer ter um plano Premium ou Banner?
+                      </p>
+                      <p className="text-muted-foreground text-xs mb-3">
+                        Fale com nossa central para assinar o plano premium.
+                      </p>
+                      <Button asChild size="sm" className="bg-[#25D366] hover:bg-[#20bd5a] text-white w-full sm:w-auto">
+                        <a href={WHATSAPP_PREMIUM_LINK} target="_blank" rel="noopener noreferrer">
+                          Falar no WhatsApp
+                        </a>
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
 
           {/* Basic Info */}
           <Card>
@@ -566,20 +593,10 @@ export default function Cadastro() {
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <Label htmlFor="cidade">Cidade *</Label>
-                  <Input
-                    id="cidade"
-                    value={cidade}
-                    onChange={(e) => setCidade(e.target.value)}
-                    placeholder="Ex: São Paulo"
-                    required
-                  />
-                </div>
-                <div>
                   <Label htmlFor="estado">Estado *</Label>
                   <Select value={estado} onValueChange={setEstado} required>
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione" />
+                      <SelectValue placeholder="Selecione o estado" />
                     </SelectTrigger>
                     <SelectContent>
                       {ESTADOS_BR.map((e) => (
@@ -590,7 +607,35 @@ export default function Cadastro() {
                     </SelectContent>
                   </Select>
                 </div>
+                <div>
+                  <Label htmlFor="cidade">Cidade *</Label>
+                  <Select value={cidade} onValueChange={setCidade} required disabled={!estado || cidadesIBGE.length === 0}>
+                    <SelectTrigger>
+                      <SelectValue placeholder={estado ? "Selecione a cidade" : "Selecione o estado primeiro"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {cidadesIBGE.map((c, i) => (
+                        <SelectItem key={i} value={c.nome}>
+                          {c.nome}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
+
+              {endereco && cidade && estado && (
+                <div className="mt-4 overflow-hidden rounded-lg border border-border">
+                  <iframe 
+                    width="100%" 
+                    height="200" 
+                    frameBorder="0" 
+                    style={{ border: 0 }} 
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(endereco + ', ' + cidade + ' - ' + estado)}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              )}
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
