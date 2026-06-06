@@ -9,7 +9,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { isValidUrl, isEmpresaAberta } from "@/lib/utils";
 import { formatHorarioDisplay } from "@/components/HorarioFuncionamento";
-import { MapPin, Phone, Globe, Clock, ChevronLeft, ChevronRight, Loader2, Share2 } from "lucide-react";
+import { MapPin, Phone, Globe, Clock, ChevronLeft, ChevronRight, Loader2, Share2, Check } from "lucide-react";
 import { AvaliacoesSection } from "@/components/empresas/AvaliacoesSection";
 import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";
@@ -39,6 +39,7 @@ interface Empresa {
   meta_description?: string | null;
   slug?: string | null;
   faq?: { pergunta: string; resposta: string }[] | null;
+  verificada?: boolean | null;
 }
 
 interface RatingAgg {
@@ -401,8 +402,16 @@ export default function Empresa() {
               <div className="flex items-start justify-between gap-4 flex-wrap">
                 <div className="flex items-center gap-3">
                   <h1 className="font-display text-3xl font-bold">{empresa.nome}</h1>
+                  {empresa.verificada && (
+                    <div 
+                      className="flex items-center justify-center rounded-full bg-green-500 p-1 mt-1" 
+                      title="Empresa Verificada"
+                    >
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                  )}
                   {abertaAgora && !allImages.length && (
-                    <Badge className="bg-green-500 hover:bg-green-600 text-white">
+                    <Badge className="bg-green-500 hover:bg-green-600 text-white mt-1">
                       Aberto
                     </Badge>
                   )}

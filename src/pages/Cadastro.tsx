@@ -61,7 +61,6 @@ export default function Cadastro() {
   const [fotosAdicionaisPreview, setFotosAdicionaisPreview] = useState<string[]>([]);
   const [parceiroLocal, setParceiroLocal] = useState<{nome: string, whatsapp: string} | null>(null);
 
-  const [fotosAdicionaisPreview, setFotosAdicionaisPreview] = useState<string[]>([]);
 
   // Buscar cidades do IBGE quando mudar estado
   useEffect(() => {
@@ -563,6 +562,7 @@ export default function Cadastro() {
           )}
 
 
+          <div className={step === 1 ? "space-y-8" : "hidden"}>
           {/* Basic Info */}
           <Card>
             <CardHeader>

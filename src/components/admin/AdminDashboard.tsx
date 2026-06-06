@@ -723,28 +723,30 @@ export function AdminDashboard() {
 
       {/* System Health + Realtime Bar */}
       <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="border-green-200 bg-green-50/50 dark:border-green-900 dark:bg-green-950/20">
-          <CardContent className="p-3">
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
-                <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+        <Card className="border-green-200/50 bg-gradient-to-br from-green-50 to-green-100/50 dark:border-green-900/30 dark:from-green-950/20 dark:to-green-900/10 shadow-sm transition-all hover:shadow-md">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="relative rounded-full bg-green-200/50 p-2 dark:bg-green-900/50">
+                <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
+                <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-green-500 animate-pulse border border-white dark:border-slate-900" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">Sistema</p>
-                <p className="text-sm font-bold text-green-700 dark:text-green-400">Online</p>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-green-600/80 dark:text-green-400/80">Status do Sistema</p>
+                <p className="text-xl font-bold text-green-700 dark:text-green-300">Online</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-3">
-            <div className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-blue-500" />
+        <Card className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 shadow-sm border-slate-200/60 dark:border-slate-700/50 transition-all hover:shadow-md">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-blue-100/50 p-2 dark:bg-blue-900/30">
+                <Activity className="h-6 w-6 text-blue-500" />
+              </div>
               <div>
-                <p className="text-xs text-muted-foreground">Última Atividade</p>
-                <p className="text-sm font-bold">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/80">Última Atividade</p>
+                <p className="text-sm font-bold text-foreground">
                   {systemHealth.lastActivity
                     ? formatDistanceToNow(new Date(systemHealth.lastActivity), { addSuffix: true, locale: ptBR })
                     : "Sem dados"}
@@ -754,28 +756,32 @@ export function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-3">
-            <div className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-purple-500" />
+        <Card className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 shadow-sm border-slate-200/60 dark:border-slate-700/50 transition-all hover:shadow-md">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="rounded-full bg-purple-100/50 p-2 dark:bg-purple-900/30">
+                <Users className="h-6 w-6 text-purple-500" />
+              </div>
               <div>
-                <p className="text-xs text-muted-foreground">Usuários Registrados</p>
-                <p className="text-sm font-bold">{stats.totalUsuarios}</p>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/80">Usuários Registrados</p>
+                <p className="text-xl font-bold text-foreground">{stats.totalUsuarios}</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-3">
-            <div className="flex items-center gap-2">
-              <div className="relative">
-                <Zap className="h-5 w-5 text-amber-500" />
-                <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
+        <Card className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 shadow-sm border-slate-200/60 dark:border-slate-700/50 transition-all hover:shadow-md">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <div className="relative rounded-full bg-amber-100/50 p-2 dark:bg-amber-900/30">
+                <Zap className="h-6 w-6 text-amber-500" />
+                <span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-amber-400 animate-pulse border border-white dark:border-slate-900" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground">Visitantes Ativos</p>
-                <p className="text-sm font-bold">{activeVisitors} <span className="text-xs font-normal text-muted-foreground">nos últimos 5 min</span></p>
+                <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/80">Visitantes Ativos</p>
+                <p className="text-xl font-bold text-foreground">
+                  {activeVisitors} <span className="text-xs font-normal text-muted-foreground">agora</span>
+                </p>
               </div>
             </div>
           </CardContent>
@@ -785,20 +791,20 @@ export function AdminDashboard() {
       {/* Stats Cards */}
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 xl:grid-cols-9 [&>*]:min-w-0">
         {statCards.map((stat, index) => (
-          <Card key={index}>
+          <Card key={index} className="bg-gradient-to-b from-white to-slate-50 dark:from-slate-900 dark:to-slate-800/80 shadow-sm hover:shadow-md transition-shadow border-slate-200/60 dark:border-slate-700/50">
             <CardContent className="p-3">
-              <div className="flex items-center justify-between">
-                <div className="min-w-0">
-                  <p className="text-[10px] text-muted-foreground truncate">{stat.title}</p>
-                  <p className="mt-0.5 text-lg font-bold">{stat.value}</p>
-                  {stat.variation !== undefined && (
-                    <div className={`mt-0.5 flex items-center text-[10px] ${stat.variation >= 0 ? "text-green-600" : "text-destructive"}`}>
-                      {stat.variation >= 0 ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
-                      {Math.abs(stat.variation).toFixed(1)}%
-                    </div>
-                  )}
+              <div className="flex flex-col items-center justify-center text-center">
+                <div className="mb-2 rounded-full bg-slate-100/80 p-2 dark:bg-slate-800">
+                  <stat.icon className={`h-4 w-4 ${stat.color}`} />
                 </div>
-                <stat.icon className={`h-5 w-5 flex-shrink-0 ${stat.color}`} />
+                <p className="text-xl font-bold tracking-tight text-foreground">{stat.value}</p>
+                <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground/80">{stat.title}</p>
+                {stat.variation !== undefined && (
+                  <div className={`mt-1.5 flex items-center rounded-full px-1.5 py-0.5 text-[10px] font-medium ${stat.variation >= 0 ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400" : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"}`}>
+                    {stat.variation >= 0 ? <ArrowUpRight className="mr-0.5 h-3 w-3" /> : <ArrowDownRight className="mr-0.5 h-3 w-3" />}
+                    {Math.abs(stat.variation).toFixed(1)}%
+                  </div>
+                )}
               </div>
             </CardContent>
           </Card>
@@ -807,9 +813,9 @@ export function AdminDashboard() {
 
       {/* Main Charts */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Evolução de Tráfego</CardTitle>
+        <Card className="shadow-sm border-slate-200/60 dark:border-slate-700/50">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg">Evolução de Tráfego</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="h-72">

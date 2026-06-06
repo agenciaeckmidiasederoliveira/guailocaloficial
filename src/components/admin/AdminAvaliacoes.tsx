@@ -16,8 +16,8 @@ interface AvaliacaoAdmin {
   nota: number;
   comentario: string | null;
   nome_avaliador: string | null;
-  aprovado: boolean;
-  created_at: string;
+  aprovada: boolean;
+  criado_em: string;
   empresa?: { nome: string; slug: string | null } | null;
 }
 
@@ -31,11 +31,11 @@ export function AdminAvaliacoes() {
     setLoading(true);
     let q = supabase
       .from("avaliacoes")
-      .select("id, empresa_id, nota, comentario, nome_avaliador, aprovado, created_at")
-      .order("created_at", { ascending: false })
+      .select("id, empresa_id, nota, comentario, nome_avaliador, aprovada, criado_em")
+      .order("criado_em", { ascending: false })
       .limit(500);
-    if (filtro === "pendentes") q = q.eq("aprovado", true).is("nome_avaliador", null);
-    if (filtro === "reprovadas") q = q.eq("aprovado", false);
+    if (filtro === "pendentes") q = q.eq("aprovada", false).is("nome_avaliador", null);
+    if (filtro === "reprovadas") q = q.eq("aprovada", false);
     const { data } = await q;
     const rows = (data ?? []) as AvaliacaoAdmin[];
 
@@ -58,11 +58,11 @@ export function AdminAvaliacoes() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtro]);
 
-  const setAprovado = async (id: string, aprovado: boolean) => {
-    const { error } = await supabase.from("avaliacoes").update({ aprovado }).eq("id", id);
+  const setAprovado = async (id: string, aprovada: boolean) => {
+    const { error } = await supabase.from("avaliacoes").update({ aprovada }).eq("id", id);
     if (error) return toast({ title: "Erro", description: error.message, variant: "destructive" });
-    setAvaliacoes((p) => p.map((a) => (a.id === id ? { ...a, aprovado } : a)));
-    toast({ title: aprovado ? "Avaliação aprovada" : "Avaliação reprovada" });
+    setAvaliacoes((p) => p.map((a) => (a.id === id ? { ...a, aprovada } : a)));
+    toast({ title: aprovada ? "Avaliação aprovada" : "Avaliação reprovada" });
   };
 
   const excluir = async (id: string) => {
@@ -73,7 +73,7 @@ export function AdminAvaliacoes() {
     toast({ title: "Avaliação excluída" });
   };
 
-  const totalReprovadas = avaliacoes.filter((a) => !a.aprovado).length;
+  const totalReprovadas = avaliacoes.filter((a) => !a.aprovada).length;
 
   return (
     <div className="space-y-6">
@@ -113,7 +113,7 @@ export function AdminAvaliacoes() {
           {avaliacoes.map((a) => (
             <Card
               key={a.id}
-              className={cn(!a.aprovado && "border-destructive/40 bg-destructive/5")}
+              className={cn(!a.aprovada && "border-destructive/40 bg-destructive/5")}
             >
               <CardContent className="p-4">
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
@@ -122,8 +122,8 @@ export function AdminAvaliacoes() {
                       <span className="font-semibold">
                         {a.nome_avaliador || "Anônimo"}
                       </span>
-                      <Badge variant={a.aprovado ? "default" : "destructive"}>
-                        {a.aprovado ? "Aprovada" : "Reprovada"}
+                      <Badge variant={a.aprovada ? "default" : "destructive"}>
+                        {a.aprovada ? "Aprovada" : "Reprovada"}
                       </Badge>
                       <div className="flex">
                         {[1, 2, 3, 4, 5].map((s) => (
@@ -154,7 +154,7 @@ export function AdminAvaliacoes() {
                       )}
                       <span>·</span>
                       <span>
-                        {format(new Date(a.created_at), "d MMM yyyy 'às' HH:mm", { locale: ptBR })}
+                        {format(new Date(a.criado_em), "d MMM yyyy 'às' HH:mm", { locale: ptBR })}
                       </span>
                     </div>
                     {a.comentario && (
@@ -164,7 +164,7 @@ export function AdminAvaliacoes() {
                     )}
                   </div>
                   <div className="flex gap-2 md:flex-col">
-                    {a.aprovado ? (
+                    {a.aprovada ? (
                       <Button
                         size="sm"
                         variant="outline"

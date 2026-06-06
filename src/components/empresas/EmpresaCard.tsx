@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { BadgePremium } from "@/components/ui/badge-premium";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Globe, MessageCircle, Heart, Loader2 } from "lucide-react";
+import { MapPin, Phone, Globe, MessageCircle, Heart, Loader2, Check } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useFavoritosContext } from "@/contexts/FavoritosContext";
 import { isEmpresaAberta, isValidUrl } from "@/lib/utils";
@@ -25,6 +25,7 @@ interface Empresa {
   nicho: string | null;
   site?: string | null;
   horario?: string | null;
+  verificada?: boolean | null;
 }
 
 interface EmpresaCardProps {
@@ -126,9 +127,19 @@ export function EmpresaCard({ empresa }: EmpresaCardProps) {
           </div>
         </div>
         <CardContent className="p-4">
-          <h3 className="font-display text-lg font-semibold text-foreground line-clamp-1">
-            {empresa.nome}
-          </h3>
+          <div className="flex items-center gap-1.5">
+            <h3 className="font-display text-lg font-semibold text-foreground line-clamp-1">
+              {empresa.nome}
+            </h3>
+            {empresa.verificada && (
+              <div 
+                className="flex items-center justify-center rounded-full bg-green-500 p-0.5" 
+                title="Empresa Verificada"
+              >
+                <Check className="h-3 w-3 text-white" />
+              </div>
+            )}
+          </div>
           {empresa.nicho && (
             <span className="mt-1 inline-block rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground">
               {empresa.nicho}
