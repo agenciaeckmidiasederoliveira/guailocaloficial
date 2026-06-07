@@ -1,7 +1,15 @@
 -- ═══════════════════════════════════════════════════════════════════════
--- FIX 1: Corrigir RLS policy de avaliacoes que chama jsonb_array_length
---         em coluna que pode ser text[] em instâncias mais antigas
+-- FIX 0: Criar função unaccent_simple (Dependência)
 -- ═══════════════════════════════════════════════════════════════════════
+CREATE OR REPLACE FUNCTION public.unaccent_simple(t text)
+RETURNS text LANGUAGE sql IMMUTABLE SET search_path = public AS $$
+  SELECT translate(coalesce(t,''),
+    'áàâãäåāăąéèêëēĕėęěíìîïīĭįóòôõöøōŏőúùûüūŭůűųçćĉċčñńÁÀÂÃÄÅĀĂĄÉÈÊËĒĔĖĘĚÍÌÎÏĪĬĮÓÒÔÕÖØŌŎŐÚÙÛÜŪŬŮŰŲÇĆĈĊČÑŃ',
+    'aaaaaaaaaeeeeeeeeeiiiiiiiooooooooouuuuuuuuuccccccnnAAAAAAAAAEEEEEEEEEIIIIIIIOOOOOOOOOUUUUUUUUUCCCCCCNN');
+$$;
+
+-- ═══════════════════════════════════════════════════════════════════════
+-- FIX 1: Corrigir RLS policy de avaliacoes que chama jsonb_array_length
 
 -- A função admin_get_parceiros_analytics usa jsonb_array_length(p.cidades_atendidas)
 -- e é chamada indiretamente por políticas RLS ao inserir em avaliacoes.
