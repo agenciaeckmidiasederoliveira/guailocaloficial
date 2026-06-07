@@ -152,6 +152,22 @@ export function BulkImportXLSX({
     URL.revokeObjectURL(url);
   };
 
+  const exportDatabase = async () => {
+    toast({ title: "Gerando exportação...", description: "Baixando dados de todas as empresas cadastradas." });
+    try {
+      const { data, error } = await supabase.from('empresas').select('*');
+      if (error) throw error;
+      
+      const ws = XLSX.utils.json_to_sheet(data);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Empresas_Backup");
+      XLSX.writeFile(wb, `GuiaLocalBR_Backup_${new Date().toISOString().slice(0,10)}.xlsx`);
+      toast({ title: "Exportação concluída!", description: "Arquivo XLSX baixado com sucesso." });
+    } catch (err: any) {
+      toast({ title: "Erro na exportação", description: err.message, variant: "destructive" });
+    }
+  };
+
   // ===== Parse =====
   /** Recebe matriz crua (com possível preâmbulo) e devolve linhas normalizadas. */
   const matrixToObjects = (matrix: unknown[][]): Record<string, unknown>[] => {
@@ -276,7 +292,7 @@ export function BulkImportXLSX({
       const chunk = slice.map((r) => {
         const d = r.data!;
         const fotos = collectFotos(d);
-        return {
+        const rowData = {
           usuario_id: usuarioId,
           imported_by: usuarioId,
           imported_at: nowIso,
@@ -297,8 +313,12 @@ export function BulkImportXLSX({
           plano: d.plano as "free" | "premium",
           status: d.status as "aprovado" | "pendente",
         };
+        if (d.id) {
+          (rowData as any).id = d.id;
+        }
+        return rowData;
       });
-      const { error } = await supabase.from("empresas").insert(chunk as any);
+      const { error } = await supabase.from("empresas").upsert(chunk as any, { onConflict: "id" });
       if (error) {
         console.error("Erro de inserção:", error);
         failCount += chunk.length;
@@ -374,6 +394,10 @@ export function BulkImportXLSX({
             <Button type="button" variant="outline" onClick={() => downloadTemplate("csv")}>
               <Download className="mr-2 h-4 w-4" />
               Baixar Template CSV
+            </Button>
+            <Button type="button" variant="default" className="bg-amber-600 hover:bg-amber-700" onClick={exportDatabase}>
+              <Download className="mr-2 h-4 w-4" />
+              Baixar Backup do Banco de Dados (.xlsx)
             </Button>
             <input
               ref={fileRef}

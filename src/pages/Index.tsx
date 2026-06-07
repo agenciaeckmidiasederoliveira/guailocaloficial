@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from "@/integrations/supabase/client";
 
 const EMP=[
@@ -102,6 +103,25 @@ const CIDS=[
 const MQ=[..."Maringá · PR,Paiçandu · PR,Sarandi · PR,Curitiba · PR,Vila Velha · ES,Petrópolis · RJ,Cuiabá · MT,Ilhéus · BA,Vilhena · RO,Nova Aurora · PR,Araraquara · SP,Alfenas · MG,Cotia · SP,Americana · SP,Nova Odessa · SP,Primavera do Leste · MT,S.J. dos Pinhais · PR,Pouso Alegre · MG,Campo Mourão · PR,Londrina · PR".split(",")];
 
 export default function Index() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Intercept clicks on links for SPA navigation
+    const handleLinkClick = (e: MouseEvent) => {
+      const a = (e.target as HTMLElement).closest('a');
+      if (a && a.hasAttribute('href')) {
+        const href = a.getAttribute('href')!;
+        if (href.startsWith('/') && !href.startsWith('http')) {
+          e.preventDefault();
+          navigate(href);
+          window.scrollTo(0, 0);
+        }
+      }
+    };
+    document.addEventListener('click', handleLinkClick);
+    return () => document.removeEventListener('click', handleLinkClick);
+  }, [navigate]);
+
   useEffect(() => {
     // MARQUEE
     const mqEl = document.getElementById('mq');
@@ -154,7 +174,7 @@ export default function Index() {
       currentBanners.forEach((b,i)=>{
         bc.innerHTML+=`<div class="banner-big" style="display:${i===bIdx?'flex':'none'}" id="ban${i}">
           <div class="banner-bg" style="${b.bgImg ? `background:url(${b.bgImg}) center/cover no-repeat` : `background:${b.g}`}"></div>
-          <div class="banner-overlay" style="${b.bgImg ? 'background:linear-gradient(90deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.5) 60%,transparent 100%)' : 'background:linear-gradient(90deg,rgba(0,0,0,0.3),transparent)'}"></div>
+          <div class="banner-overlay" style="${b.bgImg ? 'background:linear-gradient(90deg,rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 70%)' : 'background:linear-gradient(90deg,rgba(0,0,0,0.3),transparent)'}"></div>
           <div class="banner-content">
             <span class="banner-tag" style="${b.bgImg ? 'background:var(--g);color:#fff;border:none' : ''}">${b.tag}</span>
             <div class="banner-h" style="${b.bgImg ? 'text-shadow:0 2px 10px rgba(0,0,0,0.6)' : ''}">${b.h}</div>
@@ -181,12 +201,12 @@ export default function Index() {
     banTimer = setInterval(()=>goBan((bIdx+1)%currentBanners.length),5000);
 
     // DESTAQUES FIXOS EM GRID COM DADOS REAIS DO SUPABASE E NOVO DESIGN
-    function formatP(p: string){
+    function formatP(p: any){
       if(!p) return '';
-      const n = p.replace(/\D/g, '');
+      const n = String(p).replace(/\D/g, '');
       if(n.length === 11) return `(${n.slice(0,2)}) ${n.slice(2,7)}-${n.slice(7)}`;
       if(n.length === 10) return `(${n.slice(0,2)}) ${n.slice(2,6)}-${n.slice(6)}`;
-      return p;
+      return String(p);
     }
     
     function cardHTML(e: any){
@@ -206,10 +226,10 @@ export default function Index() {
           <div class="ecard-title">${e.n}</div>
           ${e.cat ? `<div class="ecard-tag">${e.cat}</div>` : ''}
           
-          <div class="ecard-row">
+          ${(e.c && e.u) ? `<div class="ecard-row">
             <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            ${e.c||'Cidade'}, ${e.u||'UF'}
-          </div>
+            ${e.c}, ${e.u}
+          </div>` : ''}
           <div class="ecard-row">
             <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             ${formatP(e.wa || e.tel)}
@@ -223,15 +243,15 @@ export default function Index() {
               WhatsApp
             </a>
             ${e.insta ? `
-            <a href="${e.insta.startsWith('http') ? e.insta : 'https://instagram.com/'+e.insta.replace('@','')}" target="_blank" class="ecard-btn ecard-ig-btn" title="Instagram">
+            <a href="${String(e.insta).startsWith('http') ? e.insta : 'https://instagram.com/'+String(e.insta).replace('@','')}" target="_blank" class="ecard-btn ecard-ig-btn" title="Instagram">
               <svg viewBox="0 0 24 24" style="width:16px;height:16px"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
             </a>` : ''}
             ${e.fb ? `
-            <a href="${e.fb.startsWith('http') ? e.fb : 'https://facebook.com/'+e.fb}" target="_blank" class="ecard-btn ecard-fb-btn" title="Facebook">
+            <a href="${String(e.fb).startsWith('http') ? e.fb : 'https://facebook.com/'+e.fb}" target="_blank" class="ecard-btn ecard-fb-btn" title="Facebook">
               <svg viewBox="0 0 24 24" style="width:16px;height:16px"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
             </a>` : ''}
             ${e.site ? `
-            <a href="${e.site.startsWith('http') ? e.site : 'https://'+e.site}" target="_blank" class="ecard-btn ecard-site-btn" title="Site">
+            <a href="${String(e.site).startsWith('http') ? e.site : 'https://'+e.site}" target="_blank" class="ecard-btn ecard-site-btn" title="Site">
               <svg viewBox="0 0 24 24" style="width:16px;height:16px"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>
             </a>` : ''}
           </div>
@@ -251,11 +271,11 @@ export default function Index() {
 
       if (data && data.length > 0) {
         currentBanners = data.slice(0,3).map(e => ({
-          tag: `${e.cidade.toUpperCase()} · ${e.estado.toUpperCase()}`,
-          h: e.nome,
-          sub: e.nicho ? `Especialistas em ${e.nicho} na sua região. Acesse nosso perfil e entre em contato.` : `A melhor opção em ${e.cidade}. Conheça nossos produtos e serviços hoje mesmo!`,
+          tag: e.cidade && e.estado ? `${e.cidade.toUpperCase()} · ${e.estado.toUpperCase()}` : 'DESTAQUE',
+          h: e.nome || 'Empresa',
+          sub: e.nicho ? `Especialistas em ${e.nicho} na sua região. Acesse nosso perfil e entre em contato.` : `Conheça nossos produtos e serviços hoje mesmo!`,
           bgImg: e.foto_principal,
-          waLink: `https://wa.me/55${(e.whatsapp||e.telefone||'').replace(/\D/g,'')}`,
+          waLink: `https://wa.me/55${String(e.whatsapp||e.telefone||'').replace(/\D/g,'')}`,
           btn: "Falar com Empresa"
         }));
         bIdx = 0;
@@ -322,12 +342,12 @@ export default function Index() {
         </div>`).join('');
       } else if (marcasEl) {
         const fallback = [...MARCAS, ...MARCAS];
-        marcasEl.innerHTML = fallback.map(m => `<div class="mc">
-          <div class="mc-logo" style="background:${m.bg}">${m.e}</div>
-          <div class="mc-name">${m.n}</div>
-          <div class="mc-cat">${m.cat}</div>
-          <div class="mc-city">${m.c}</div>
-          <div class="mc-stars">★★★★★</div>
+        marcasEl.innerHTML = fallback.map(e => `<div class="mc">
+          <div class="mc-logo" style="background:${e.bg}">${e.e}</div>
+          <div class="ecard-n">${e.n||'Empresa'}</div>
+          ${e.cat ? `<div class="ecard-cat">${e.cat}</div>` : ''}
+          ${(e.c && e.u) ? `<div class="ecard-meta"><span>📍</span> ${e.c}, ${e.u}</div>` : ''}
+          <div class="ecard-meta"><span>📞</span> ${e.tel ? formatP(e.tel) : (e.wa ? formatP(e.wa) : 'Não informado')}</div> 
           <div class="mc-verified">✓ VERIFICADO</div>
         </div>`).join('');
       }
@@ -416,7 +436,7 @@ export default function Index() {
 .mq-wrap::before{left:0;background:linear-gradient(90deg,#F8FAFC,transparent)}
 .mq-wrap::after{right:0;background:linear-gradient(-90deg,#F8FAFC,transparent)}
 .mq-inner{display:flex;white-space:nowrap;width:max-content;animation:mqScroll 25s linear infinite}
-@keyframes mqScroll{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+@keyframes mqScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .mqi{display:inline-flex;align-items:center;gap:7px;padding:0 24px;font-size:12px;font-weight:700;color:var(--tx);border-right:1px solid var(--border)}
 .mqd{width:7px;height:7px;background:var(--g);border-radius:50%;flex-shrink:0;animation:pulse 2s ease-in-out infinite}
 .mqc{color:var(--bd)}
@@ -585,10 +605,10 @@ export default function Index() {
 .ftg{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:36px;padding-bottom:36px}
 .ftbrand{font-family:'Sora',sans-serif;font-size:17px;font-weight:900;color:#fff;margin-bottom:9px}
 .ftbrand b{color:var(--g)}
-.ftdesc{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;max-width:260px;font-weight:500}
-.ftct{font-size:11px;font-weight:800;color:rgba(255,255,255,.9);letter-spacing:1.2px;margin-bottom:14px}
-.ftl{font-size:13px;color:rgba(255,255,255,.6);display:block;margin-bottom:10px;transition:color .15s;font-weight:500;cursor:pointer}
-.ftl:hover{color:#fff}
+.ftdesc{font-size:13px;color:#e2e8f0 !important;line-height:1.7;max-width:260px;font-weight:500}
+.ftct{font-size:11px;font-weight:800;color:#ffffff !important;letter-spacing:1.2px;margin-bottom:14px}
+.ftl{font-size:13px;color:#cbd5e1 !important;display:block;margin-bottom:10px;transition:color .15s;font-weight:600;cursor:pointer}
+.ftl:hover{color:var(--g) !important}
 .ftbot{border-top:1px solid rgba(255,255,255,.1);padding:24px 0;display:flex;justify-content:space-between;align-items:center;margin-top:20px}
 .ftcopy{font-size:12px;color:rgba(255,255,255,.5);font-weight:500}
       ` }} />
@@ -601,17 +621,17 @@ export default function Index() {
     </div>
     <div class="nbrand">Guia Local <b>BR</b></div>
   </div>
-  <div class="nlinks">
-    <a class="nlink">Início</a>
-    <a class="nlink">Buscar Empresas</a>
-    <a class="nlink">Cadastrar Empresa</a>
-    <a class="nlink">Planos</a>
-    <a class="nlink">Blog</a>
-    <a class="nlink">Parceiros</a>
+  <div class="nmenu">
+    <a class="nlink" href="/">Início</a>
+    <a class="nlink" href="/busca">Buscar Empresas</a>
+    <a class="nlink" href="/cadastro">Cadastrar Empresa</a>
+    <a class="nlink" href="/admin">Dashboard Admin</a>
+    <a class="nlink" href="/busca">Planos</a>
+    <a class="nlink" href="/blog">Blog</a>
+    <a class="nlink" href="/parceiros">Parceiros</a>
   </div>
   <div class="nacts">
-    <button class="btn-o">Entrar</button>
-    <button class="btn-s">Cadastre Grátis</button>
+    <a class="selink" href="/cadastro">Anunciar aqui <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
 </nav>
 
@@ -670,7 +690,7 @@ export default function Index() {
     <div>
       <div class="setit">Empresas em <span>Evidência</span></div>
     </div>
-    <a class="selink">Anunciar aqui <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a class="selink" href="/cadastro">Anunciar aqui <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
   <div id="banner-container"></div>
   <div class="banner-dots" id="bdots" style="position:relative;right:auto;bottom:auto;margin-top:16px;display:flex;justify-content:center;gap:6px"></div>
@@ -706,7 +726,7 @@ export default function Index() {
     <div>
       <div class="setit">Cidades em <span>Destaque</span></div>
     </div>
-    <a class="selink">Ver todas as cidades <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a class="selink" href="/busca">Ver todas as cidades <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
   <div class="cid-grid" id="cids"></div>
 </section>
@@ -718,7 +738,7 @@ export default function Index() {
       <div class="seeye">CONTEÚDO LOCAL</div>
       <div class="setit">Blog & <span>Dicas</span></div>
     </div>
-    <a class="selink">Ver tudo <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a class="selink" href="/blog">Ver tudo <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
   <div class="blog-grid">
     <div class="bc">
@@ -746,9 +766,9 @@ export default function Index() {
 <section class="sec" style="background:var(--bg)">
   <div class="serow">
     <div>
-      <div class="setit">Todas as <span>Empresas</span></div>
+      <div class="setit">Empresas <span>Recentes</span></div>
     </div>
-    <a class="selink">Ver todas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    <a class="selink" href="/busca">Ver todas <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
   </div>
   <div class="list-grid" id="lista"></div>
 </section>
@@ -786,15 +806,15 @@ export default function Index() {
     </div>
     <div>
       <div class="ftct">ATALHOS</div>
-      <a class="ftl">Sobre Nós</a><a class="ftl">Nosso Blog</a><a class="ftl">Categorias</a><a class="ftl">Cidades</a><a class="ftl">Baixar Planilha (.xlsx)</a>
+      <a class="ftl" href="/sobre">Sobre Nós</a><a class="ftl" href="/blog">Nosso Blog</a><a class="ftl" href="/busca">Categorias</a><a class="ftl" href="/busca">Cidades</a><a class="ftl" href="/admin">Baixar Planilha (.xlsx)</a>
     </div>
     <div>
       <div class="ftct">PARCERIAS</div>
-      <a class="ftl">Anunciar Negócio</a><a class="ftl">Seja um Parceiro</a><a class="ftl">Planos e Preços</a><a class="ftl">Programa de Parceiros</a>
+      <a class="ftl" href="/cadastro">Anunciar Negócio</a><a class="ftl" href="/parceiro">Seja um Parceiro</a><a class="ftl" href="/cadastro">Planos e Preços</a><a class="ftl" href="/parceiros">Programa de Parceiros</a>
     </div>
     <div>
       <div class="ftct">INSTITUCIONAL</div>
-      <a class="ftl">Política de Privacidade</a><a class="ftl">Termos de Uso</a><a class="ftl">Contato</a>
+      <a class="ftl" href="/privacidade">Política de Privacidade</a><a class="ftl" href="/termos">Termos de Uso</a><a class="ftl" href="/contato">Contato</a>
     </div>
   </div>
   <div class="ftbot">

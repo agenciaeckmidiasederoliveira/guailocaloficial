@@ -14,6 +14,7 @@ const optUrl = optStr.refine(
 export const MAX_FOTOS = 8;
 
 export const importRowSchema = z.object({
+  id: z.string().optional().or(z.literal("")),
   nome: z.string().trim().min(2, "Nome muito curto").max(120),
   categoria: z
     .string()
@@ -85,6 +86,7 @@ export type ImportRow = z.infer<typeof importRowSchema>;
 
 /** Cabeçalhos canônicos do modelo. */
 export const IMPORT_HEADERS = [
+  "id",
   "nome",
   "categoria",
   "estado",
@@ -121,8 +123,8 @@ function slugify(h: string): string {
 }
 
 const HEADER_ALIASES: Record<string, string> = {
-  // identificador (planilha oficial tem coluna ID, descartada)
-  id: "_ignored",
+  // identificador (usado para atualizações em massa)
+  id: "id",
   // nome
   nome: "nome",
   nome_da_empresa: "nome",
