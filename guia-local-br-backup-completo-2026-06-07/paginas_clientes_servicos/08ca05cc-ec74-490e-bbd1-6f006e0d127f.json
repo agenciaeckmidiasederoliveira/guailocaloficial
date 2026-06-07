@@ -1,0 +1,65 @@
+{
+  "id": "08ca05cc-ec74-490e-bbd1-6f006e0d127f",
+  "page_id": "74301f0f-126a-401b-b98e-6ccc2b3925b5",
+  "business_id": "a2dfc360-199e-4e54-9bce-0d7a31fe02ad",
+  "slug_servico": "clinica-de-estetica-perto-de-mim-em-ilheus",
+  "servico_nome": "Clínica de Estética perto de mim",
+  "servico_descricao": "Busca local por Clínica de Estética",
+  "cidade_alvo": "Ilhéus",
+  "status": "ativo",
+  "hero_titulo": "Transforme sua Beleza na Nossa Clínica de Estética",
+  "hero_subtitulo": "Cuide de si mesma com profissionais especializados",
+  "intro": "Se você está procurando uma Clínica de Estética perto de mim em Ilhéus, a Sirleia Souza - Beleza e Estética é a escolha perfeita para quem deseja realçar a beleza natural e cuidar da saúde da pele. Localizada em uma região acessível, nossa clínica oferece uma variedade de tratamentos estéticos personalizados, adequados para atender às suas necessidades e expectativas. Com uma equipe de profissionais qualificados, garantimos um atendimento atencioso e resultados satisfatórios. Venha nos visitar e descubra como podemos ajudá-la a se sentir ainda mais confiante e radiante.",
+  "secoes": [
+    {
+      "titulo": "Tratamentos Oferecidos",
+      "conteudo": "Na Sirleia Souza - Beleza e Estética, oferecemos uma ampla gama de tratamentos que vão desde limpeza de pele, hidratação facial, até procedimentos mais avançados como preenchimentos e botox. Cada tratamento é realizado com produtos de alta qualidade e técnicas atualizadas, garantindo a segurança e satisfação de nossas clientes. Nossa equipe está sempre pronta para avaliar suas necessidades e sugerir as melhores opções para você. Venha conhecer nossos serviços e encontre o tratamento ideal para realçar sua beleza!"
+    },
+    {
+      "titulo": "Profissionais Qualificados",
+      "conteudo": "Nossa equipe é composta por esteticistas e dermatologistas experientes que estão constantemente atualizados com as últimas tendências e técnicas do mercado. Na Clínica de Estética perto de mim em Ilhéus, você será atendida por profissionais que se preocupam com seu bem-estar e resultados. Cada procedimento é realizado com atenção aos detalhes e um toque pessoal, assegurando que você se sinta confortável e satisfeita durante toda a experiência. Acreditamos que a beleza é única e merece ser tratada de forma especial!"
+    },
+    {
+      "titulo": "Ambiente Aconchegante e Seguro",
+      "conteudo": "Na Sirleia Souza - Beleza e Estética, o conforto e a segurança de nossas clientes são prioridades. Nossa clínica foi projetada para proporcionar um ambiente relaxante e acolhedor, onde você pode se sentir à vontade para cuidar de si mesma. Seguimos rigorosos protocolos de limpeza e higiene, garantindo que cada visita seja segura e tranquila. Venha nos visitar e descubra um espaço onde a beleza e o bem-estar se encontram!"
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Quais são os principais tratamentos disponíveis na clínica?",
+      "resposta": "Oferecemos uma variedade de tratamentos estéticos, incluindo limpeza de pele, hidratação facial, preenchimentos, botox, entre outros. Nossos profissionais estão prontos para ajudar a escolher o melhor tratamento para você."
+    },
+    {
+      "pergunta": "A clínica é acessível?",
+      "resposta": "Sim, estamos localizados em uma região central de Ilhéus, facilitando o acesso para todas as nossas clientes."
+    },
+    {
+      "pergunta": "É necessário agendar horário antes de visitar a clínica?",
+      "resposta": "Recomendamos agendar um horário para garantir um atendimento personalizado e evitar esperas, mas também aceitamos visitas sem agendamento, conforme a disponibilidade."
+    }
+  ],
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/sirleia-souza-beleza-e-estetica-ilheus/clinica-de-estetica-perto-de-mim-em-ilheus",
+    "name": "Clínica de Estética perto de mim",
+    "@type": "Service",
+    "@context": "https://schema.org",
+    "provider": {
+      "name": "Sirleia Souza - Beleza e Estética",
+      "@type": "LocalBusiness",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "BA",
+        "addressCountry": "BR",
+        "addressLocality": "Ilhéus"
+      }
+    },
+    "areaServed": "Ilhéus",
+    "description": "Descubra a melhor Clínica de Estética perto de mim em Ilhéus. Tratamentos personalizados com profissionais qualificados. Venha realçar sua beleza!"
+  },
+  "meta_title": "Clínica de Estética em Ilhéus - Sirleia Souza",
+  "meta_description": "Descubra a melhor Clínica de Estética perto de mim em Ilhéus. Tratamentos personalizados com profissionais qualificados. Venha realçar sua beleza!",
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-20T10:45:04.180059+00:00",
+  "updated_at": "2026-05-20T10:45:04.180059+00:00"
+}

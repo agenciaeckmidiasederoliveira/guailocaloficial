@@ -1,0 +1,74 @@
+[
+  {
+    "id": "484aad76-e791-4309-8636-ae483b62c0f1",
+    "user_id": "c79d9ec3-acbb-45ac-b8cf-299a5cef4e9e",
+    "role": "admin",
+    "created_at": "2026-04-20T08:40:44.60198+00:00"
+  },
+  {
+    "id": "0f917e4c-bf7c-4695-a347-9643290b622f",
+    "user_id": "f1f9ce1f-abbe-46a6-9ffe-796da563df7d",
+    "role": "user",
+    "created_at": "2026-04-20T08:40:44.60198+00:00"
+  },
+  {
+    "id": "cd552612-8272-4cc8-8dd6-94f5de6b9a3f",
+    "user_id": "446a3c24-83d0-4f5a-b8aa-d866b3d41404",
+    "role": "user",
+    "created_at": "2026-04-20T08:40:44.60198+00:00"
+  },
+  {
+    "id": "ede22acc-227c-4721-bee9-de1b76f1f4f6",
+    "user_id": "79c82690-0df5-4915-9534-f020f2077b76",
+    "role": "user",
+    "created_at": "2026-04-20T08:40:44.60198+00:00"
+  },
+  {
+    "id": "0d9d5da0-a9f4-447b-a2a8-e015fb5eba48",
+    "user_id": "9db0ef93-3be8-435e-8ce5-fa5864dd73c3",
+    "role": "user",
+    "created_at": "2026-04-20T08:40:44.60198+00:00"
+  },
+  {
+    "id": "fd58fce2-1da2-4312-b338-9e45e7ad8bcf",
+    "user_id": "8f5e248f-237e-4c11-97b5-c8f071f1646b",
+    "role": "user",
+    "created_at": "2026-04-20T08:40:44.60198+00:00"
+  },
+  {
+    "id": "4990d257-f60b-4d87-a547-b63ef7e18e42",
+    "user_id": "4d392eed-a1a9-457f-a709-bb1c8fc255ba",
+    "role": "parceiro",
+    "created_at": "2026-04-23T08:58:58.738399+00:00"
+  },
+  {
+    "id": "18481e70-2afb-4067-a9e5-9a2219a55e42",
+    "user_id": "3c4b4cc3-3ad6-48a4-98a8-c07367f06cea",
+    "role": "user",
+    "created_at": "2026-04-26T23:05:25.383912+00:00"
+  },
+  {
+    "id": "2febe428-bc51-462f-8047-24eb833be8c2",
+    "user_id": "1a243d24-896a-4ec3-8398-c6a0396e09fc",
+    "role": "user",
+    "created_at": "2026-05-15T02:03:14.347931+00:00"
+  },
+  {
+    "id": "337fa5b7-23c9-40cc-a552-28b89235aefc",
+    "user_id": "3565e8c6-dc05-4a97-bcce-6dbd7578404b",
+    "role": "user",
+    "created_at": "2026-05-17T13:52:03.942514+00:00"
+  },
+  {
+    "id": "813e921f-225d-4502-832d-0ceb100a8c54",
+    "user_id": "e7515355-ce58-48bf-8e7f-a09783c352c0",
+    "role": "user",
+    "created_at": "2026-05-24T16:07:23.793803+00:00"
+  },
+  {
+    "id": "96afe5c8-c3e2-4a82-96b9-b59090f7bca5",
+    "user_id": "46e8e558-5b78-4d29-8da1-042bdbc87342",
+    "role": "user",
+    "created_at": "2026-06-02T01:16:57.039158+00:00"
+  }
+]

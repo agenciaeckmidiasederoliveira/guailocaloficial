@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { format, subDays } from "date-fns";
+import { AdminZipRestore } from "./AdminZipRestore";
 
 export function AdminConfiguracoes() {
   const { toast } = useToast();
@@ -305,8 +306,9 @@ export function AdminConfiguracoes() {
           </Button>
           <Button variant="outline" onClick={() => setRestoreOpen(true)}>
             <Upload className="mr-2 h-4 w-4" />
-            Restaurar de Backup
+            Restaurar de Backup JSON (Antigo)
           </Button>
+          <AdminZipRestore />
         </CardContent>
       </Card>
 

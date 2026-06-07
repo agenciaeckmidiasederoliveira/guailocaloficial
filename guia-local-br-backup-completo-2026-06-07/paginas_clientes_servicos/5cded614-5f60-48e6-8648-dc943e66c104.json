@@ -1,0 +1,69 @@
+{
+  "id": "5cded614-5f60-48e6-8648-dc943e66c104",
+  "page_id": "74301f0f-126a-401b-b98e-6ccc2b3925b5",
+  "business_id": "a2dfc360-199e-4e54-9bce-0d7a31fe02ad",
+  "slug_servico": "clinica-de-estetica-em-ilheus",
+  "servico_nome": "Clínica de Estética",
+  "servico_descricao": "Atendimento em Clínica de Estética",
+  "cidade_alvo": "Ilhéus",
+  "status": "ativo",
+  "hero_titulo": "Transforme sua Beleza na Nossa Clínica",
+  "hero_subtitulo": "Cuidado e Estética de Qualidade em Ilhéus",
+  "intro": "Se você está em busca de um espaço acolhedor e profissional para cuidar da sua beleza e bem-estar, a Sirleia Souza - Beleza e Estética é a escolha certa. Localizada em Ilhéus, nossa Clínica de Estética oferece uma ampla gama de serviços personalizados para atender às suas necessidades. Com uma equipe qualificada e experiente, garantimos um atendimento de excelência, utilizando técnicas modernas e produtos de alta qualidade. Nossa missão é proporcionar a você uma experiência única, onde a sua satisfação e autoestima são nossas prioridades. Venha nos visitar e descubra como podemos realçar ainda mais a sua beleza!",
+  "secoes": [
+    {
+      "titulo": "Tratamentos Personalizados",
+      "conteudo": "Na Sirleia Souza - Beleza e Estética, entendemos que cada pessoa é única. Por isso, oferecemos tratamentos personalizados que atendem às suas necessidades específicas. Desde limpeza de pele profunda até tratamentos anti-idade, nossa equipe está pronta para criar um plano de cuidados que se ajuste ao seu estilo de vida e objetivos de beleza. Utilizamos apenas produtos de qualidade, assegurando resultados visíveis e duradouros. Nossa Clínica de Estética em Ilhéus se compromete a proporcionar um atendimento humanizado, onde você se sentirá à vontade para expressar suas expectativas e desejos."
+    },
+    {
+      "titulo": "Ambiente Aconchegante e Profissional",
+      "conteudo": "Ao entrar em nossa Clínica de Estética em Ilhéus, você será recebido em um ambiente acolhedor e relaxante. Valorizamos o conforto e a privacidade de nossos clientes, por isso, nossa estrutura foi cuidadosamente planejada para oferecer o melhor em atendimento estético. Nossos profissionais são altamente capacitados e sempre atualizados com as últimas tendências e técnicas do mercado. Você pode confiar que está nas mãos de especialistas que se importam genuinamente com o seu bem-estar. Venha se surpreender com a experiência que preparamos para você!"
+    },
+    {
+      "titulo": "Resultados Comprovados e Satisfação",
+      "conteudo": "Na Sirleia Souza - Beleza e Estética, nossa prioridade é a sua satisfação. Temos um histórico de resultados comprovados, com clientes que voltam sempre em busca de novos tratamentos e cuidados. Nossos serviços são projetados para não apenas atender, mas superar suas expectativas. Acreditamos que a beleza é uma jornada, e estamos aqui para acompanhá-lo em cada passo. Entre em contato e descubra porque somos a Clínica de Estética em Ilhéus mais recomendada por nossos clientes satisfeitos."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Quais serviços vocês oferecem na Clínica de Estética em Ilhéus?",
+      "resposta": "Oferecemos uma variedade de serviços, incluindo limpeza de pele, tratamentos faciais, massagens, depilação e procedimentos estéticos avançados."
+    },
+    {
+      "pergunta": "Como agendar uma consulta?",
+      "resposta": "Você pode agendar uma consulta através do nosso site ou entrando em contato diretamente pelo telefone. Nossa equipe está pronta para atender você!"
+    },
+    {
+      "pergunta": "Os tratamentos são seguros?",
+      "resposta": "Sim, todos os nossos tratamentos são realizados por profissionais qualificados e seguem rigorosos padrões de segurança e higiene."
+    },
+    {
+      "pergunta": "Qual é a duração dos tratamentos?",
+      "resposta": "A duração dos tratamentos pode variar conforme o tipo de serviço escolhido, mas geralmente duram entre 30 minutos a 2 horas."
+    }
+  ],
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/sirleia-souza-beleza-e-estetica-ilheus/clinica-de-estetica-em-ilheus",
+    "name": "Clínica de Estética",
+    "@type": "Service",
+    "@context": "https://schema.org",
+    "provider": {
+      "name": "Sirleia Souza - Beleza e Estética",
+      "@type": "LocalBusiness",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "BA",
+        "addressCountry": "BR",
+        "addressLocality": "Ilhéus"
+      }
+    },
+    "areaServed": "Ilhéus",
+    "description": "Descubra a Sirleia Souza - Beleza e Estética, sua Clínica de Estética em Ilhéus. Tratamentos personalizados e profissionais qualificados para realçar sua beleza."
+  },
+  "meta_title": "Clínica de Estética em Ilhéus - Sirleia Souza",
+  "meta_description": "Descubra a Sirleia Souza - Beleza e Estética, sua Clínica de Estética em Ilhéus. Tratamentos personalizados e profissionais qualificados para realçar sua beleza.",
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-20T10:44:32.8964+00:00",
+  "updated_at": "2026-05-20T10:44:32.8964+00:00"
+}

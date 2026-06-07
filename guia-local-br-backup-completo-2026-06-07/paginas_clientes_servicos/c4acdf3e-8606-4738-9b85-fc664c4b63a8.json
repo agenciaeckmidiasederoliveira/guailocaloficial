@@ -1,0 +1,69 @@
+{
+  "id": "c4acdf3e-8606-4738-9b85-fc664c4b63a8",
+  "page_id": "74301f0f-126a-401b-b98e-6ccc2b3925b5",
+  "business_id": "a2dfc360-199e-4e54-9bce-0d7a31fe02ad",
+  "slug_servico": "clinica-de-estetica-para-empresas-em-ilheus",
+  "servico_nome": "Clínica de Estética para empresas",
+  "servico_descricao": "Soluções para clientes comerciais",
+  "cidade_alvo": "Ilhéus",
+  "status": "ativo",
+  "hero_titulo": "Sua Empresa Merece o Melhor em Estética",
+  "hero_subtitulo": "Transforme o bem-estar dos seus colaboradores",
+  "intro": "A Sirleia Souza - Beleza e Estética se destaca como referência em soluções de bem-estar corporativo em Ilhéus. Nossa Clínica de Estética para empresas oferece serviços personalizados que visam não apenas a estética, mas também a saúde e a qualidade de vida dos seus colaboradores. Em um ambiente corporativo onde o estresse e a correria são comuns, proporcionar momentos de relaxamento e cuidado é essencial. Nossos tratamentos são planejados para atender às necessidades específicas de cada empresa, promovendo um ambiente mais saudável e produtivo. Venha descobrir como podemos ajudar sua equipe a se sentir melhor e, consequentemente, produzir mais.",
+  "secoes": [
+    {
+      "titulo": "Serviços Personalizados para Empresas",
+      "conteudo": "Na Sirleia Souza - Beleza e Estética, entendemos que cada empresa possui necessidades únicas. Por isso, oferecemos uma variedade de serviços estéticos adaptados ao perfil dos seus colaboradores. Desde tratamentos faciais e corporais até massagens relaxantes, nossas opções são projetadas para proporcionar um momento de fuga da rotina cansativa. Ao investir na saúde estética de sua equipe, você não apenas melhora o bem-estar individual, mas também fortalece o espírito de equipe e a motivação. Os resultados são visíveis e impactantes, refletindo em um ambiente de trabalho mais harmonioso."
+    },
+    {
+      "titulo": "Benefícios da Estética Corporativa",
+      "conteudo": "Investir em uma Clínica de Estética para empresas em Ilhéus traz uma série de benefícios tanto para os colaboradores quanto para a organização. O cuidado com a estética e o bem-estar resulta em maior satisfação e produtividade. Colaboradores bem tratados tendem a apresentar menos absenteísmo e maior engajamento nas atividades diárias. Além disso, a estética corporativa promove a saúde mental, reduzindo o estresse e melhorando a autoestima. Proporcionar momentos de cuidado é uma forma eficaz de demonstrar que a empresa se importa com seus colaboradores, fortalecendo a cultura organizacional e a lealdade da equipe."
+    },
+    {
+      "titulo": "Por Que Escolher a Sirleia Souza?",
+      "conteudo": "A Sirleia Souza - Beleza e Estética é uma clínica que se preocupa com a qualidade dos serviços prestados. Com uma equipe de profissionais qualificados e apaixonados pelo que fazem, garantimos que cada tratamento seja realizado com atenção e carinho. Nossos ambientes são projetados para oferecer conforto e tranquilidade, proporcionando uma experiência única. Além disso, trabalhamos com produtos de alta qualidade que respeitam a saúde e a beleza da sua pele. Escolher nossa clínica é optar por um serviço que alia profissionalismo e cuidado, fazendo da estética uma prioridade na sua empresa."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Quais tipos de tratamentos estéticos vocês oferecem para empresas?",
+      "resposta": "Oferecemos uma variedade de tratamentos, incluindo faciais, corporais, massagens relaxantes e programas de bem-estar personalizados."
+    },
+    {
+      "pergunta": "Como funciona o agendamento dos serviços para a empresa?",
+      "resposta": "Trabalhamos com agendamentos flexíveis, adaptando-nos à rotina da sua empresa para oferecer o melhor atendimento."
+    },
+    {
+      "pergunta": "É possível realizar eventos de estética no ambiente corporativo?",
+      "resposta": "Sim! Podemos organizar dias de estética na empresa, proporcionando aos colaboradores uma experiência de bem-estar diretamente no local de trabalho."
+    },
+    {
+      "pergunta": "Qual é o diferencial da Sirleia Souza em relação a outras clínicas?",
+      "resposta": "Nosso diferencial está na personalização dos serviços e no cuidado com cada colaborador, além de uma equipe altamente capacitada."
+    }
+  ],
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/sirleia-souza-beleza-e-estetica-ilheus/clinica-de-estetica-para-empresas-em-ilheus",
+    "name": "Clínica de Estética para empresas",
+    "@type": "Service",
+    "@context": "https://schema.org",
+    "provider": {
+      "name": "Sirleia Souza - Beleza e Estética",
+      "@type": "LocalBusiness",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "BA",
+        "addressCountry": "BR",
+        "addressLocality": "Ilhéus"
+      }
+    },
+    "areaServed": "Ilhéus",
+    "description": "Descubra a Clínica de Estética para empresas em Ilhéus da Sirleia Souza. Transforme o bem-estar dos seus colaboradores com nossos serviços personalizados."
+  },
+  "meta_title": "Clínica de Estética para Empresas em Ilhéus - Sirleia Souza",
+  "meta_description": "Descubra a Clínica de Estética para empresas em Ilhéus da Sirleia Souza. Transforme o bem-estar dos seus colaboradores com nossos serviços personalizados.",
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-20T10:46:44.632801+00:00",
+  "updated_at": "2026-05-20T10:46:44.632801+00:00"
+}

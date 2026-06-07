@@ -1,0 +1,318 @@
+{
+  "id": "962b7fe4-bd1b-498e-b56c-37989015ec13",
+  "business_id": "c9d252f3-5666-4c21-8609-31fa2446f036",
+  "slug": "ana-shoes-pva-primavera-do-leste",
+  "status": "ativo",
+  "plano": "premium",
+  "hero_titulo": "Ana Shoes PVA: Tênis e Calçados em Primavera do Leste-MT | Estilo e Conforto!",
+  "hero_subtitulo": "Encontre o par perfeito que une estilo e conforto para você em Primavera do Leste.",
+  "hero_cta_texto": "Falar no WhatsApp",
+  "sobre_texto": "Bem-vindo à Ana Shoes PVA, seu destino certo para calçados de qualidade em Primavera do Leste-MT! Localizada na Rua Itapiruba, 190, Bairro Atlântico Sul, somos a loja que compreende a paixão por um bom par de tênis ou sapatos. Nossa missão é proporcionar uma experiência completa, onde conforto e estilo caminham lado a lado com você.\n\nNa Ana Shoes PVA, você encontra uma linha completa e diversificada de tênis casuais para o dia a dia, tênis esportivos de alta performance para corrida e academia, além de opções exclusivas para o público feminino, masculino e infantil. Garantimos que toda a família encontre o calçado perfeito, com sapatilhas, sandálias e botas que seguem as últimas tendências da moda calçadista.\n\nSabemos que escolher o calçado certo faz toda a diferença. Nossa equipe em Primavera do Leste está sempre pronta para um atendimento personalizado, ajudando você a encontrar o modelo que melhor se adapta à sua pisada e estilo. Priorizamos a durabilidade e qualidade, trabalhando com as melhores marcas para um investimento inteligente em sapatos e acessórios.\n\nVenha nos visitar e descubra por que a Ana Shoes PVA é a escolha ideal para quem busca conforto, moda e excelência em calçados aqui em Primavera do Leste. Seja para um novo par que complemente seu vestuário ou o tênis ideal que impulse sua performance, estamos prontos para te surpreender. Ana Shoes PVA: onde cada passo é uma declaração de estilo!",
+  "servicos": [],
+  "diferenciais": [],
+  "faq": [],
+  "blog_posts": [],
+  "depoimentos": [],
+  "meta_title": "Tênis e Calçados em Primavera do Leste-MT | GuiaLocalBR",
+  "meta_description": "Ana Shoes PVA oferece tênis e calçados para toda família em Primavera do Leste. Conforto, estilo e as melhores marcas. Visite-nos!",
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/ana-shoes-pva-primavera-do-leste",
+    "name": "ANA SHOES PVA",
+    "@type": "LocalBusiness",
+    "image": "https://cogcidjnhnjlgvmbbgab.supabase.co/storage/v1/object/public/empresas/admin/1774949929022-vtuxix.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "MT",
+      "streetAddress": "Rua Itapiruba, 190 - Bairro Atlântico Sul",
+      "addressCountry": "BR",
+      "addressLocality": "Primavera do Leste"
+    },
+    "@context": "https://schema.org",
+    "telephone": "(65) 99945- 0012",
+    "areaServed": [
+      {
+        "name": "Centro, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim das Palmeiras, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim Primavera, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim Bela Vista, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Parque das Américas, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Setor Industrial, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim América, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim São Paulo, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim Ipanema, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Vila Nova, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim Morumbi, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Vila Verde, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Cohab, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Vila Santa Luzia, Primavera do Leste - MT",
+        "@type": "Place"
+      },
+      {
+        "name": "Jardim Universitário, Primavera do Leste - MT",
+        "@type": "Place"
+      }
+    ],
+    "knowsAbout": [
+      "Lojas",
+      "Comércio em geral",
+      "Produtos diversos",
+      "Vendas",
+      "Estabelecimentos comerciais",
+      "Mercadorias",
+      "Bens de consumo",
+      "Promoções",
+      "Variedade",
+      "Atendimento ao cliente"
+    ],
+    "priceRange": "$$",
+    "description": "Ana Shoes PVA oferece tênis e calçados para toda família em Primavera do Leste. Conforto, estilo e as melhores marcas. Visite-nos!"
+  },
+  "cor_primaria": "#16a34a",
+  "whatsapp": "(65) 99945- 0012",
+  "email_contato": null,
+  "endereco": "Rua Itapiruba, 190 - Bairro Atlântico Sul",
+  "cidade": "Primavera do Leste",
+  "estado": "MT",
+  "categoria": "Varejo",
+  "horario_funcionamento": {},
+  "agendamento_ativo": false,
+  "agendamento_link": null,
+  "fotos": [
+    "https://cogcidjnhnjlgvmbbgab.supabase.co/storage/v1/object/public/empresas/admin/1774949929022-vtuxix.png"
+  ],
+  "posicao_estimada": 2,
+  "cliques_mes_estimado": 150,
+  "cpc_equivalente": 1.5,
+  "economia_ads_anual": 2700,
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-16T09:37:14.875556+00:00",
+  "updated_at": "2026-05-16T09:38:20.371367+00:00",
+  "publicado_at": "2026-05-16T09:38:20.174+00:00",
+  "bairros": [
+    {
+      "nome": "Centro",
+      "slug": "centro",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA EXPLORAR NOSSA VARIEDADE HOJE!",
+      "paragrafo_1": "Ei, moradores do Centro de Primavera do Leste! Cansados de procurar por opções de qualidade e variedade em produtos diversos? Sabemos como é importante ter um bom comércio por perto, que realmente entenda as necessidades do dia a dia de cada família. Por isso, a ANA SHOES PVA se destaca como sua principal escolha de varejo aqui no Centro. Chega de bater perna sem encontrar o que procura! Nossa loja é pensada para você, que valoriza a comodidade e um atendimento que faz a diferença, oferecendo uma experiência de compra completa e satisfatória. Em Primavera do Leste-MT, somos o ponto certo para suas compras, disponibilizando uma ampla gama de mercadorias com a qualidade que você e sua família merecem. Venha conferir o que preparamos para você e descubra por que somos o estabelecimento comercial que faz a diferença na sua rotina!",
+      "paragrafo_2": "Na ANA SHOES PVA, entendemos que comprar não é só adquirir bens de consumo, é uma experiência! Nosso processo é simples e focado em você: desde o momento em que você entra em nossa loja no Centro, será recebido por uma equipe atenciosa e pronta para ajudar. Oferecemos uma vasta seleção de mercadorias, cuidadosamente escolhidas para atender aos gostos e bolsos dos moradores de Primavera do Leste. Nosso diferencial? A proximidade e a personalização. Queremos que você se sinta em casa, encontrando exatamente o que precisa, seja para o dia a dia ou para uma ocasião especial. Escolher um estabelecimento comercial local como o nosso fortalece nossa comunidade e garante que você sempre terá acesso ao melhor!",
+      "paragrafo_3": "Nossa atuação não se limita apenas às ruas e avenidas do Centro! A ANA SHOES PVA tem orgulho de servir toda a região de Primavera do Leste, estendendo a mão para os moradores da Região Oeste, Região Leste, Região Sul e Região Norte. Estamos convenientemente localizados perto de pontos de referência como a Praça da Matriz e a Igreja Matriz São Francisco de Assis, e somos de fácil acesso para quem vem da Avenida dos Estados ou da Avenida Cuiabá. Atendemos também nossos vizinhos dos bairros Jardim das Palmeiras, Jardim Primavera e Jardim Bela Vista, garantindo que todos tenham acesso à nossa incrível variedade e promoções. Venha nos visitar e comprove porque somos o comércio preferido da cidade!",
+      "subtitulo_1": "ANA SHOES PVA: Seu Atendimento Personalizado no Coração do Centro",
+      "subtitulo_2": "ANA SHOES PVA: Atendimento em Todo o Entorno do Centro de Primavera do Leste",
+      "titulo_secao": "Varejo no Centro de Primavera do Leste-MT"
+    },
+    {
+      "nome": "Jardim das Palmeiras",
+      "slug": "jardim-das-palmeiras",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VISITE ANA SHOES PVA HOJE MESMO!",
+      "paragrafo_1": "Ei, morador do Jardim das Palmeiras! Sabe aquela sensação boa de encontrar tudo que você precisa pertinho de casa, com um atendimento que realmente entende o que você busca? É exatamente isso que a ANA SHOES PVA traz para você aqui no Jardim das Palmeiras, em Primavera do Leste-MT. Nós sabemos o quanto é importante ter um varejo de qualidade e confiança por perto, oferecendo produtos diversos que facilitam o seu dia a dia. Chega de longas viagens para o centro ou outros bairros distantes. Aqui, você encontra uma variedade incrível, pensada especialmente para as famílias e para a população local de Primavera do Leste, que valoriza a conveniência e um bom relacionamento. Venha conhecer a sua nova loja favorita, feita para a nossa comunidade!",
+      "paragrafo_2": "Na ANA SHOES PVA, nosso processo de atendimento é pensado para ser simples e acolhedor. Desde o momento em que você entra em nossa loja aqui no Jardim das Palmeiras, nossa equipe está pronta para ajudar a encontrar exatamente o que você procura, seja um item essencial para o dia a dia ou algo especial para presentear. Nosso grande diferencial é a variedade e a qualidade das mercadorias, sempre buscando as melhores opções para você e sua família. Priorizamos um atendimento personalizado, onde cada cliente se sente valorizado e ouvido. Comprar no comércio em geral local como o nosso significa mais do que adquirir um produto; é investir na economia do nosso bairro, fortalecer os laços da comunidade e ter a certeza de um suporte sempre presente. Venha viver essa experiência de compra diferenciada, com toda a atenção que você merece.",
+      "paragrafo_3": "A ANA SHOES PVA tem orgulho de servir não apenas o Jardim das Palmeiras, mas toda a região em torno. Estamos estrategicamente localizados para atender moradores da Região Sul de Primavera do Leste e dos bairros vizinhos, como o vibrante Centro, o acolhedor Jardim Primavera, o moderno Jardim América e o expansivo Jardim São Paulo. Nossa localização facilita o acesso para quem transita pelas avenidas principais da cidade, como a movimentada Avenida dos Estados e a sempre útil Avenida Cuiabá, garantindo que você chegue até nós com facilidade. Além disso, estamos a poucos minutos de pontos de referência importantes, como o Shopping Primavera, um ótimo local para combinar suas compras, ou o Lago Municipal Salto das Águas, perfeito para um passeio antes ou depois de nos visitar. Venha nos conhecer e descubra a conveniência de ter uma loja completa perto de você!",
+      "subtitulo_1": "Como funciona o atendimento da ANA SHOES PVA no Jardim das Palmeiras",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim das Palmeiras",
+      "titulo_secao": "Varejo no Jardim das Palmeiras em Primavera do Leste-MT"
+    },
+    {
+      "nome": "Jardim Primavera",
+      "slug": "jardim-primavera",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA CONHECER NOSSAS OFERTAS!",
+      "paragrafo_1": "Atenção, moradores do Jardim Primavera! Se você está buscando as melhores opções de varejo em Primavera do Leste, a ANA SHOES PVA é a escolha certa. Aqui, você encontra uma variedade de produtos que atendem às suas necessidades do dia a dia. Seja para calçados, roupas ou acessórios, nossa loja no Jardim Primavera está pronta para oferecer a melhor experiência de compra. Venha nos visitar e descubra tudo o que temos a oferecer para você e sua família!",
+      "paragrafo_2": "Na ANA SHOES PVA, nosso atendimento é pensado especialmente para você, morador do Jardim Primavera. Ao entrar em nossa loja, você será recebido por uma equipe amigável e disposta a ajudar. Temos uma ampla gama de mercadorias, desde os itens mais básicos até as últimas tendências do mercado. Além disso, nossa loja sempre traz promoções incríveis, garantindo que você encontre os melhores preços e a maior variedade de produtos. Estamos aqui para tornar suas compras mais práticas e agradáveis!",
+      "paragrafo_3": "Localizada na Região Leste de Primavera do Leste, a ANA SHOES PVA atende não só os moradores do Jardim Primavera, mas também os bairros vizinhos como Centro, Jardim das Palmeiras e Jardim Bela Vista. Estamos próximos de avenidas movimentadas como a Avenida dos Estados e Avenida Cuiabá, facilitando o acesso para todos da região. Se você está na Praça da Matriz ou no Lago Municipal Salto das Águas, não hesite em dar uma passada na nossa loja! Garantimos um atendimento de qualidade e produtos que vão atender todas as suas expectativas!",
+      "subtitulo_1": "Como funciona nosso atendimento no Jardim Primavera",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim Primavera",
+      "titulo_secao": "Varejo no Bairro Jardim Primavera em Primavera do Leste"
+    },
+    {
+      "nome": "Jardim Bela Vista",
+      "slug": "jardim-bela-vista",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA NOS VISITAR HOJE MESMO!",
+      "paragrafo_1": "Você, que mora no Jardim Bela Vista, sabe como é importante ter acesso a um comércio que atenda às suas necessidades do dia a dia, não é mesmo? A ANA SHOES PVA é a loja perfeita para você! Localizada no coração de Primavera do Leste, no bairro Jardim Bela Vista, oferecemos uma variedade incrível de produtos e promoções que vão te surpreender. Venha conferir nossas mercadorias e descubra como é fácil e conveniente fazer suas compras por aqui!",
+      "paragrafo_2": "Aqui na ANA SHOES PVA, nosso atendimento é pensado especialmente para você, morador do Jardim Bela Vista. Desde o momento em que você entra na loja, nossa equipe está pronta para te ajudar a encontrar exatamente o que você precisa. Trabalhamos com um mix diversificado de bens de consumo, sempre com promoções imperdíveis e produtos que atendem todos os gostos e idades. O nosso compromisso é oferecer um atendimento ao cliente que faz a diferença, garantindo que sua experiência de compra seja a melhor possível!",
+      "paragrafo_3": "Estamos localizados na Região Sul de Primavera do Leste, uma área com fácil acesso pelas principais avenidas, como Avenida dos Estados e Avenida Cuiabá. Além do Jardim Bela Vista, atendemos também os bairros vizinhos, como Centro e Jardim Primavera. Isso significa que, não importa onde você esteja, a ANA SHOES PVA sempre estará pertinho de você. Venha nos visitar e aproveite tudo que temos a oferecer para facilitar suas compras!",
+      "subtitulo_1": "Como funciona nosso atendimento no Jardim Bela Vista",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim Bela Vista",
+      "titulo_secao": "Varejo no Bairro Jardim Bela Vista em Primavera do Leste"
+    },
+    {
+      "nome": "Parque das Américas",
+      "slug": "parque-das-americas",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VISITE A ANA SHOES PVA HOJE MESMO!",
+      "paragrafo_1": "Ei, morador do Parque das Américas! Sabe aquela busca por um lugar onde você encontra tudo o que precisa, com qualidade e pertinho de casa? A ANA SHOES PVA chegou para ser sua nova referência em varejo aqui no coração do Parque das Américas, em Primavera do Leste-MT! A gente sabe como é importante ter um bom comércio em geral acessível, que entenda as necessidades do dia a dia da sua família e ofereça uma experiência de compra sem igual. Esqueça o corre-corre por toda a cidade; a conveniência de ter uma loja completa no seu bairro é um diferencial que valoriza seu tempo e seu bolso. Ao escolher a ANA SHOES PVA, você não está só comprando produtos diversos; está fortalecendo a economia da nossa comunidade, garantindo que o dinheiro circule por aqui e ajudando a manter negócios locais prósperos. Nosso objetivo é atender desde as necessidades básicas até aqueles desejos especiais, com um atendimento que faz você se sentir em casa, como um vizinho que a gente conhece e confia.",
+      "paragrafo_2": "Na ANA SHOES PVA, nosso processo de atendimento é pensado para ser o mais prático e agradável possível para você, morador do Parque das Américas. Chega de filas e de perder horas procurando. Nossa equipe está pronta para te receber com um sorriso e te ajudar a encontrar exatamente o que você busca entre nossa vasta variedade de produtos diversos. Seja para as compras do dia a dia ou para aquela ocasião especial, garantimos mercadorias de qualidade e sempre com promoções que cabem no seu orçamento. O diferencial de comprar conosco vai além do preço; é a certeza de um atendimento personalizado, onde suas preferências são levadas em conta. Entendemos a dinâmica da vida em Primavera do Leste e a importância de oferecer conveniência não só para as famílias do bairro, mas também para a população rural do entorno que nos visita. Aqui, você encontra tudo em um só lugar, economizando tempo e energia.",
+      "paragrafo_3": "Nossa missão é levar a melhor experiência de compras não só para o Parque das Américas, mas para toda a região! A ANA SHOES PVA atende com facilidade os moradores de Primavera do Leste, cobrindo uma vasta área que se estende por importantes vias como a Avenida dos Estados e a Avenida Cuiabá, facilitando o acesso de quem vem de outros pontos da cidade. Estamos estrategicamente localizados para que, seja você do Centro, Jardim das Palmeiras, Jardim Primavera ou Jardim Bela Vista, chegue até nós sem complicação. Nossa proximidade com pontos de referência como o Lago Municipal Salto das Águas e o Shopping Primavera torna sua visita ainda mais conveniente. Valorizamos cada cliente que nos escolhe, seja da Região Leste ou de outras partes da cidade, e nos empenhamos para ser o seu destino preferencial para todas as suas necessidades de consumo. Venha conhecer a diferença de um comércio que realmente se importa com a comunidade!",
+      "subtitulo_1": "Como funciona o atendimento da ANA SHOES PVA no Parque das Américas",
+      "subtitulo_2": "Atendimento em todo o entorno do Parque das Américas",
+      "titulo_secao": "Varejo no Parque das Américas em Primavera do Leste-MT"
+    },
+    {
+      "nome": "Setor Industrial",
+      "slug": "setor-industrial",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA NOS VISITAR AGORA!",
+      "paragrafo_1": "E aí, morador do Setor Industrial! Se você está em busca de um comércio que ofereça variedade, qualidade e aquele atendimento de primeira, a ANA SHOES PVA é a sua melhor opção. Aqui em Primavera do Leste, especialmente no nosso querido Setor Industrial, temos tudo o que você precisa em produtos e mercadorias. Venha conhecer as nossas promoções e descubra como podemos facilitar o seu dia a dia!",
+      "paragrafo_2": "Na ANA SHOES PVA, o atendimento é personalizado e pensado para você, morador do Setor Industrial. Nossas vendas são rápidas e eficientes, garantindo que você encontre o que precisa sem complicações. Temos uma equipe pronta para tirar suas dúvidas e ajudar na escolha do melhor produto. E o melhor: aqui, você encontra uma diversidade de bens de consumo que atendem todas as idades e rendas, sempre com promoções imperdíveis!",
+      "paragrafo_3": "Estamos localizados no coração de Primavera do Leste, perto de importantes avenidas como a Avenida dos Estados e a Avenida Cuiabá. Nossa loja é de fácil acesso para quem vem do Centro, Jardim das Palmeiras ou Jardim Primavera. Além disso, estamos a poucos minutos do Lago Municipal Salto das Águas e do Parque Municipal de Exposições, o que torna sua visita ainda mais conveniente! Venha nos visitar e conheça tudo que temos a oferecer!",
+      "subtitulo_1": "Como funciona nosso atendimento no Setor Industrial",
+      "subtitulo_2": "Atendimento em todo o entorno do Setor Industrial",
+      "titulo_secao": "Varejo no Setor Industrial em Primavera do Leste"
+    },
+    {
+      "nome": "Jardim América",
+      "slug": "jardim-america",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA CONHECER NOSSAS OFERTAS!",
+      "paragrafo_1": "Fala, galera do Jardim América! Se você está em busca de um lugar onde possa encontrar tudo que precisa, a ANA SHOES PVA é a sua melhor opção em Primavera do Leste. Aqui, nós temos uma variedade incrível de produtos, desde calçados até acessórios, tudo pensado para atender as necessidades do nosso bairro. Com um atendimento ao cliente que faz você se sentir em casa, a gente garante que você vai sair satisfeito!",
+      "paragrafo_2": "No nosso comércio em geral, o atendimento é sempre prioridade. Ao chegar na ANA SHOES PVA, você será recebido por uma equipe super disposta a ajudar. Nós entendemos que cada cliente é único, então, buscamos oferecer uma experiência personalizada. Além disso, temos promoções frequentes e uma seleção de mercadorias que combina qualidade e preço justo. No Jardim América, queremos que você encontre tudo que precisa em um só lugar, sem complicação!",
+      "paragrafo_3": "Estamos localizados na Região Leste de Primavera do Leste, próximos a importantes avenidas como a Avenida dos Estados e a Avenida Cuiabá, facilitando o acesso para moradores de toda a cidade. Se você é do Centro, Jardim das Palmeiras, ou até mesmo do Jardim Primavera, nossa loja está de portas abertas para todos! Aproveite para visitar a ANA SHOES PVA e confira de perto a variedade que temos a oferecer. Não deixe de passar também pelo Lago Municipal Salto das Águas e o Shopping Primavera enquanto estiver por aqui!",
+      "subtitulo_1": "Como funciona o atendimento no Jardim América",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim América",
+      "titulo_secao": "Varejo no Bairro Jardim América em Primavera do Leste"
+    },
+    {
+      "nome": "Jardim São Paulo",
+      "slug": "jardim-sao-paulo",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA CONFERIR NOSSAS OFERTAS!",
+      "paragrafo_1": "Ei, morador do Jardim São Paulo! Se você está em busca de um lugar que ofereça tudo que você precisa, a ANA SHOES PVA é a loja ideal para você. Localizada bem no coração do Jardim São Paulo, em Primavera do Leste, temos uma variedade incrível de produtos e mercadorias. Seja você um amante de moda, ou apenas procurando algo prático para o dia a dia, temos tudo! Venha conferir nossas promoções e descubra como o nosso atendimento faz a diferença.",
+      "paragrafo_2": "Aqui na ANA SHOES PVA, nosso foco é sempre a satisfação do cliente. Ao chegar na nossa loja, você será recebido por uma equipe simpática e disposta a ajudar. Temos uma variedade de produtos, desde roupas e calçados até acessórios, tudo com qualidade e a preços acessíveis. Além disso, nosso atendimento é personalizado, garantindo que você encontre exatamente o que precisa. Se precisar de alguma dica ou ajuda, estamos sempre por aqui para oferecer um suporte completíssimo. Venha nos visitar e veja como podemos facilitar suas compras no Jardim São Paulo!",
+      "paragrafo_3": "Estamos localizados no Jardim São Paulo, mas atendemos também a toda a Região Sul de Primavera do Leste e bairros vizinhos como Jardim das Palmeiras e Jardim Primavera. Nossa localização é super acessível, próxima das principais avenidas, como a Avenida dos Estados e a Avenida Cuiabá. Se você está perto do Lago Municipal Salto das Águas ou do Shopping Primavera, é fácil dar um pulinho aqui! Venha conferir a variedade de produtos que temos para oferecer e fortaleça o comércio local.",
+      "subtitulo_1": "Como funciona nosso atendimento no Jardim São Paulo",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim São Paulo",
+      "titulo_secao": "Varejo no Bairro Jardim São Paulo em Primavera do Leste"
+    },
+    {
+      "nome": "Jardim Ipanema",
+      "slug": "jardim-ipanema",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA NOS VISITAR HOJE MESMO!",
+      "paragrafo_1": "Olá, morador do Jardim Ipanema! Se você está à procura de uma loja que traga uma variedade incrível de produtos, você acaba de encontrar! A ANA SHOES PVA é o seu destino ideal para compras em Primavera do Leste. Aqui, no coração do Jardim Ipanema, oferecemos tudo que você precisa, desde calçados até acessórios, tudo com aquele atendimento que só um comércio local pode proporcionar. Venha nos visitar e descubra o que temos de melhor para você!",
+      "paragrafo_2": "Na ANA SHOES PVA, o atendimento é tudo! Nossa equipe está sempre pronta para ajudar e oferecer uma experiência de compra única. Trabalhamos com uma variedade de mercadorias, desde calçados estilosos a produtos diversos que atendem a todas as idades e gostos. O nosso diferencial é a atenção personalizada que você recebe, garantindo que sua experiência de compra seja agradável e satisfatória. Venha conferir de perto o que temos a oferecer e aproveite promoções incríveis aqui mesmo no Jardim Ipanema!",
+      "paragrafo_3": "Estamos localizados no Jardim Ipanema, mas atendemos toda a região! Se você está no Centro, Jardim das Palmeiras, ou até mesmo no Jardim Primavera, nossa loja é facilmente acessível. Estamos pertinho das principais avenidas, como a Avenida dos Estados e a Avenida Cuiabá, e a poucos minutos do Lago Municipal Salto das Águas e do Shopping Primavera. Não importa de onde você venha, sempre teremos produtos e ofertas que vão te surpreender!",
+      "subtitulo_1": "Como funciona nosso atendimento no Jardim Ipanema",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim Ipanema",
+      "titulo_secao": "Varejo no Jardim Ipanema em Primavera do Leste"
+    },
+    {
+      "nome": "Vila Nova",
+      "slug": "vila-nova",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA CONFERIR NOSSAS OFERTAS!",
+      "paragrafo_1": "Você que mora no Vila Nova, já conhece a ANA SHOES PVA? Se ainda não, tá na hora de dar uma olhada! Aqui na nossa loja, você encontra uma variedade de produtos que vão desde calçados até itens de moda e acessórios, tudo com aquela qualidade que só as lojas locais oferecem. Nossa missão é garantir que os moradores de Primavera do Leste tenham acesso a mercadorias que atendam às suas necessidades diárias, com um atendimento que faz toda a diferença!",
+      "paragrafo_2": "Aqui na ANA SHOES PVA, o atendimento ao cliente é personalizado e sempre pensado no que há de melhor para você. Quando você chega na loja, nossa equipe está pronta para te ajudar a encontrar exatamente o que precisa, com carinho e atenção. Se preferir, pode até entrar em contato pelo WhatsApp (65) 99945-0012 e fazer suas perguntas, conferir promoções ou até reservar produtos. Assim, você garante que vai encontrar as melhores opções de bens de consumo que a Vila Nova tem a oferecer!",
+      "paragrafo_3": "Estamos localizados no coração do Vila Nova, mas atendemos também a toda Primavera do Leste e região. Se você está próximo à Avenida dos Estados ou ao Lago Municipal Salto das Águas, é só dar um pulo aqui! Nossos vizinhos, como o Centro e o Jardim das Palmeiras, também são super bem-vindos. O que não falta é variedade e qualidade em nossas mercadorias, tudo para garantir que cada cliente saia satisfeito e com um sorriso no rosto!",
+      "subtitulo_1": "Como funciona o atendimento na Vila Nova",
+      "subtitulo_2": "Atendimento em todo o entorno do Vila Nova",
+      "titulo_secao": "Varejo no Bairro Vila Nova em Primavera do Leste"
+    },
+    {
+      "nome": "Jardim Morumbi",
+      "slug": "jardim-morumbi",
+      "cta_emoji": "👟",
+      "cta_texto": "VENHA NOS VISITAR HOJE MESMO!",
+      "paragrafo_1": "Você, morador do Jardim Morumbi, já conhece a ANA SHOES PVA? Aqui em Primavera do Leste, no coração desse bairro aconchegante, temos tudo o que você precisa em termos de varejo. Nossa loja é o lugar perfeito para encontrar uma variedade de produtos que atendem às suas necessidades do dia a dia. Seja para renovar o guarda-roupa, encontrar aquele item especial ou aproveitar nossas promoções, estamos sempre prontos para te atender com um sorriso no rosto! Venha nos visitar e descubra por que somos a escolha favorita da vizinhança.",
+      "paragrafo_2": "Na ANA SHOES PVA, o atendimento é sempre personalizado. Nossos colaboradores estão prontos para te ajudar a encontrar o que você procura, seja um par de sapatos novo ou um acessório incrível. Aqui, a experiência de compra é única: você é atendido com atenção e carinho, garantindo que saia satisfeito. Além disso, oferecemos uma seleção de mercadorias que se adaptam a todos os gostos e orçamentos. Venha sentir a diferença de comprar em um comércio local que realmente se importa com você e com as suas necessidades no Jardim Morumbi!",
+      "paragrafo_3": "Estamos localizados em uma das melhores regiões de Primavera do Leste, perto de pontos importantes como o Lago Municipal Salto das Águas e o Shopping Primavera. Nossa loja é de fácil acesso para moradores do Jardim Morumbi e também de bairros vizinhos como o Centro, Jardim das Palmeiras e Jardim Primavera. Se você estiver pela Avenida dos Estados ou pela Avenida Cuiabá, não deixe de dar uma passada na ANA SHOES PVA. Venha conferir nossas ofertas e produtos variados em um local que valoriza o que é da nossa terra!",
+      "subtitulo_1": "Como funciona nosso atendimento no Jardim Morumbi",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim Morumbi",
+      "titulo_secao": "Varejo no Bairro Jardim Morumbi em Primavera do Leste"
+    },
+    {
+      "nome": "Vila Verde",
+      "slug": "vila-verde",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA CONHECER NOSSAS PROMOÇÕES!",
+      "paragrafo_1": "Você que mora no Vila Verde e tá buscando as melhores opções de produtos e promoções, a ANA SHOES PVA é a escolha certa! Aqui em Primavera do Leste, oferecemos uma variedade incrível de mercadorias para atender a todas as suas necessidades. Sejam calçados, roupas ou acessórios, nossa loja tem tudo que você precisa e muito mais. Venha nos visitar e descubra como podemos facilitar seu dia a dia com um atendimento de qualidade e produtos que realmente fazem a diferença!",
+      "paragrafo_2": "Na ANA SHOES PVA, o atendimento ao cliente é prioridade! Assim que você entrar na nossa loja no Vila Verde, nossa equipe estará pronta para te ajudar a encontrar o que você precisa. Trabalhamos com produtos diversos e sempre buscamos oferecer as melhores opções do mercado. Nossas promoções são feitas pensando em você, morador do Vila Verde, para que tenha acesso a bens de consumo de qualidade, sem precisar sair da sua região. Seu conforto e satisfação são nossa missão!",
+      "paragrafo_3": "Estamos localizados em um ponto estratégico de Primavera do Leste, perto de avenidas principais como a Avenida dos Estados e Avenida Cuiabá, facilitando o acesso para moradores do Centro e bairros vizinhos como Jardim das Palmeiras e Jardim Primavera. A ANA SHOES PVA é mais do que uma loja, é parte da comunidade, e queremos atender você e sua família com carinho e atenção. Se você está próximo ao Lago Municipal Salto das Águas ou ao Shopping Primavera, não deixe de nos visitar!",
+      "subtitulo_1": "Como funciona nosso atendimento no Vila Verde",
+      "subtitulo_2": "Atendimento em todo o entorno do Vila Verde",
+      "titulo_secao": "Varejo no Bairro Vila Verde em Primavera do Leste"
+    },
+    {
+      "nome": "Cohab",
+      "slug": "cohab",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA NOS VISITAR HOJE MESMO!",
+      "paragrafo_1": "Você que mora no Cohab, em Primavera do Leste, sabe que ter acesso a um bom comércio em geral é essencial para o dia a dia. Na ANA SHOES PVA, oferecemos uma variedade incrível de produtos que atendem a todas as suas necessidades. Seja para comprar aquele par de sapatos novo ou outros bens de consumo, estamos aqui para você! Com um atendimento que faz a diferença, nossa loja é o lugar ideal para quem busca qualidade e conforto na hora de fazer suas compras.",
+      "paragrafo_2": "Aqui na ANA SHOES PVA, prezamos por um atendimento ao cliente excepcional. Nossa equipe está sempre pronta para ajudar você a encontrar exatamente o que precisa. Trabalhamos com uma grande variedade de mercadorias e promoções que vão desde calçados até acessórios, tudo para atender a sua demanda de forma rápida e eficiente. Se você está no Cohab e procura um estabelecimento comercial que entende suas necessidades, venha nos visitar e sinta a diferença na experiência de compra!",
+      "paragrafo_3": "Localizados no coração do Cohab, atendemos não apenas os moradores desse bairro, mas também aqueles que vêm de regiões vizinhas como o Centro, Jardim das Palmeiras e Jardim Primavera. Nossa loja é fácil de encontrar, próxima a importantes avenidas como a Avenida dos Estados e Avenida Cuiabá. Se você estiver passando pela Praça da Matriz ou pelo Lago Municipal Salto das Águas, não deixe de dar uma passada na ANA SHOES PVA! Estamos aqui para oferecer a melhor experiência em vendas na região.",
+      "subtitulo_1": "Como funciona nosso atendimento no Cohab",
+      "subtitulo_2": "Atendimento em todo o entorno do Cohab",
+      "titulo_secao": "Varejo no Bairro Cohab em Primavera do Leste"
+    },
+    {
+      "nome": "Vila Santa Luzia",
+      "slug": "vila-santa-luzia",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA NOS VISITAR HOJE!",
+      "paragrafo_1": "Você que mora na Vila Santa Luzia, já conhece a ANA SHOES PVA? Se ainda não, tá perdendo tempo! Nossa loja é a opção perfeita para quem busca variedade de produtos e um atendimento de qualidade. Aqui em Primavera do Leste, especialmente na Vila Santa Luzia, temos tudo que você precisa para o dia a dia. Desde calçados até diversos itens de moda, garantimos que você vai encontrar o que procura, com aquela atenção especial que só um comércio local pode oferecer.",
+      "paragrafo_2": "Na ANA SHOES PVA, o nosso processo de atendimento é pensado para você! Ao chegar na loja, nossa equipe está pronta para ajudar você a encontrar os melhores produtos que atendam às suas necessidades. Com uma seleção incrível de mercadorias e promoções imperdíveis, você vai adorar a experiência de compra. Além disso, priorizamos um atendimento próximo e amigável, fazendo com que você se sinta em casa. E o melhor: tudo isso na sua própria Vila Santa Luzia!",
+      "paragrafo_3": "Estamos localizados na Vila Santa Luzia, mas atendemos também os bairros vizinhos como Centro, Jardim das Palmeiras e Jardim Primavera. Nossa loja é de fácil acesso, próxima a importantes avenidas como a Avenida dos Estados e Avenida Cuiabá. Se você está na Região Sul ou mesmo na Região Leste de Primavera do Leste, não hesite em nos visitar! Estamos aqui para oferecer produtos que atendem a todas as idades e rendas, sempre com aquele carinho que só quem é da região pode oferecer.",
+      "subtitulo_1": "Como funciona nosso atendimento na Vila Santa Luzia",
+      "subtitulo_2": "Atendimento em todo o entorno da Vila Santa Luzia",
+      "titulo_secao": "Varejo no Bairro Vila Santa Luzia em Primavera do Leste"
+    },
+    {
+      "nome": "Jardim Universitário",
+      "slug": "jardim-universitario",
+      "cta_emoji": "🛍️",
+      "cta_texto": "VENHA NOS VISITAR AGORA!",
+      "paragrafo_1": "Você, morador do Jardim Universitário, já conhece a ANA SHOES PVA? Aqui é o seu lugar ideal para encontrar uma variedade de produtos e mercadorias que atendem a todas as suas necessidades! Nossa loja é conhecida por oferecer um atendimento ao cliente excepcional e uma gama diversificada de bens de consumo, tudo pertinho de você, em Primavera do Leste. Se você está em busca de conveniência e qualidade, venha conferir nossas promoções e novidades!",
+      "paragrafo_2": "No ANA SHOES PVA, nosso atendimento é feito com carinho e atenção, sempre buscando entender as suas necessidades. Ao entrar em nossa loja, você será recebido por uma equipe pronta para ajudar, seja na escolha de um calçado ideal ou na procura por um produto específico. Nosso diferencial é a conexão com a comunidade do Jardim Universitário, oferecendo um serviço que vai além da venda. Aproveite a variedade que temos a oferecer e descubra como podemos facilitar suas compras diárias!",
+      "paragrafo_3": "Estamos localizados no Jardim Universitário, mas atendemos toda a região de Primavera do Leste. Se você está próximo da Avenida dos Estados ou do Lago Municipal Salto das Águas, é fácil nos encontrar! Também servimos os bairros vizinhos como Jardim das Palmeiras e Jardim Primavera, sempre prontos para levar um pouco mais de conforto e qualidade para o seu dia a dia. Venha nos visitar e veja como podemos fazer a diferença na sua experiência de compra!",
+      "subtitulo_1": "Como funciona nosso atendimento no Jardim Universitário",
+      "subtitulo_2": "Atendimento em todo o entorno do Jardim Universitário",
+      "titulo_secao": "Varejo no Jardim Universitário em Primavera do Leste"
+    }
+  ],
+  "total_bairros": 15,
+  "cliques_whatsapp": 0,
+  "nome_empresa": "ANA SHOES PVA",
+  "telefone": "(65) 99945- 0012",
+  "descricao_original": "A Ana Shoes PVA é a sua melhor escolha em calçados em Primavera do Leste. Localizada no Bairro Atlântico Sul, oferecemos uma linha completa de tênis casuais para o dia a dia, tênis esportivos para alta performance e modelos exclusivos nos segmentos feminino, masculino e infantil.\n\nPriorizamos o seu conforto e estilo, contando com um atendimento personalizado para ajudar você a encontrar o par ideal. Se você busca qualidade e durabilidade em tênis em PVA, venha nos visitar na Rua Itapiruba, 190. Ana Shoes: onde o estilo encontra o conforto"
+}

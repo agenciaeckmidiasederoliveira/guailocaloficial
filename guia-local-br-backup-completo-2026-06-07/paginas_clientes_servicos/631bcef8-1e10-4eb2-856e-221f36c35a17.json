@@ -1,0 +1,65 @@
+{
+  "id": "631bcef8-1e10-4eb2-856e-221f36c35a17",
+  "page_id": "74301f0f-126a-401b-b98e-6ccc2b3925b5",
+  "business_id": "a2dfc360-199e-4e54-9bce-0d7a31fe02ad",
+  "slug_servico": "clinica-de-estetica-urgente-em-ilheus",
+  "servico_nome": "Clínica de Estética urgente",
+  "servico_descricao": "Atendimento ágil conforme disponibilidade",
+  "cidade_alvo": "Ilhéus",
+  "status": "ativo",
+  "hero_titulo": "Clínica de Estética Urgente em Ilhéus",
+  "hero_subtitulo": "Beleza e Bem-Estar ao Seu Alcance",
+  "intro": "Na Sirleia Souza - Beleza e Estética, entendemos que a beleza não pode esperar. Nossa Clínica de Estética Urgente em Ilhéus oferece um atendimento ágil e personalizado, garantindo que você receba os cuidados que precisa no momento em que mais precisa. Nossa equipe de profissionais qualificados está preparada para atender sua demanda com eficiência e carinho, proporcionando resultados que realçam sua beleza natural. Seja para uma ocasião especial ou um cuidado de rotina, estamos aqui para atender suas necessidades estéticas com a rapidez que você merece.",
+  "secoes": [
+    {
+      "titulo": "Atendimentos Rápidos e Eficientes",
+      "conteudo": "Na nossa Clínica de Estética Urgente em Ilhéus, a velocidade no atendimento é uma das nossas prioridades. Sabemos que, em alguns momentos, você pode precisar de um serviço estético com urgência, seja um retoque de cabelo, uma limpeza de pele ou um tratamento específico. Nossa equipe está sempre pronta para oferecer soluções rápidas, sem comprometer a qualidade e a eficácia dos nossos serviços. Com um agendamento flexível e um ambiente acolhedor, garantimos que você se sinta confortável enquanto cuidamos da sua beleza."
+    },
+    {
+      "titulo": "Tratamentos Personalizados para Cada Necessidade",
+      "conteudo": "Entendemos que cada pessoa é única e possui necessidades estéticas diferentes. Por isso, na nossa Clínica de Estética Urgente em Ilhéus, oferecemos uma ampla gama de tratamentos personalizados. Desde procedimentos faciais e corporais até cuidados específicos, nossos profissionais estão prontos para avaliar suas necessidades e propor as melhores soluções. Com tecnologia de ponta e produtos de alta qualidade, garantimos resultados que superam suas expectativas, tudo isso com a agilidade que você procura."
+    },
+    {
+      "titulo": "Compromisso com a Sua Satisfação",
+      "conteudo": "A satisfação dos nossos clientes é o nosso maior compromisso. Na Sirleia Souza - Beleza e Estética, acreditamos que um atendimento de qualidade vai além do serviço prestado. Nossa Clínica de Estética Urgente em Ilhéus se destaca pelo atendimento humanizado, onde cada cliente é tratado com atenção e respeito. Estamos sempre prontos para ouvir suas opiniões e sugestões, buscando continuamente melhorar nossos serviços. Acreditamos que a beleza deve ser uma experiência prazerosa, e estamos aqui para garantir que você tenha a melhor experiência possível."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Quais serviços estão disponíveis na Clínica de Estética Urgente em Ilhéus?",
+      "resposta": "Oferecemos uma variedade de serviços estéticos, incluindo limpezas de pele, tratamentos faciais, depilação, massagens e muito mais, todos com atendimento ágil."
+    },
+    {
+      "pergunta": "Como posso agendar um atendimento na clínica?",
+      "resposta": "Você pode agendar seu atendimento pelo nosso telefone ou WhatsApp. Nossa equipe está pronta para atender sua solicitação e esclarecer suas dúvidas."
+    },
+    {
+      "pergunta": "Os atendimentos são realizados por profissionais qualificados?",
+      "resposta": "Sim, todos os nossos atendimentos são realizados por profissionais capacitados e experientes na área de estética, garantindo a qualidade e segurança dos procedimentos."
+    }
+  ],
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/sirleia-souza-beleza-e-estetica-ilheus/clinica-de-estetica-urgente-em-ilheus",
+    "name": "Clínica de Estética urgente",
+    "@type": "Service",
+    "@context": "https://schema.org",
+    "provider": {
+      "name": "Sirleia Souza - Beleza e Estética",
+      "@type": "LocalBusiness",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "BA",
+        "addressCountry": "BR",
+        "addressLocality": "Ilhéus"
+      }
+    },
+    "areaServed": "Ilhéus",
+    "description": "Atendimento ágil e personalizado na Clínica de Estética Urgente em Ilhéus. Venha realçar sua beleza com a Sirleia Souza - Beleza e Estética!"
+  },
+  "meta_title": "Clínica de Estética Urgente em Ilhéus - Sirleia Souza",
+  "meta_description": "Atendimento ágil e personalizado na Clínica de Estética Urgente em Ilhéus. Venha realçar sua beleza com a Sirleia Souza - Beleza e Estética!",
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-20T10:47:04.519492+00:00",
+  "updated_at": "2026-05-20T10:47:04.519492+00:00"
+}

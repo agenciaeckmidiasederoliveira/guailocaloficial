@@ -1,0 +1,69 @@
+{
+  "id": "363b1101-0da7-4c55-91d2-4f92cd556daf",
+  "page_id": "74301f0f-126a-401b-b98e-6ccc2b3925b5",
+  "business_id": "a2dfc360-199e-4e54-9bce-0d7a31fe02ad",
+  "slug_servico": "clinica-de-estetica-com-whatsapp-em-ilheus",
+  "servico_nome": "Clínica de Estética com WhatsApp",
+  "servico_descricao": "Contato rápido pelo WhatsApp",
+  "cidade_alvo": "Ilhéus",
+  "status": "ativo",
+  "hero_titulo": "Transforme sua Beleza na Sirleia Souza",
+  "hero_subtitulo": "A sua Clínica de Estética com WhatsApp em Ilhéus",
+  "intro": "Na Sirleia Souza - Beleza e Estética, oferecemos um atendimento excepcional para você que busca realçar a sua beleza e autoestima. Localizada em Ilhéus, nossa clínica é especializada em tratamentos estéticos que atendem às suas necessidades, tudo isso com a conveniência do contato rápido pelo WhatsApp. Nossa equipe de profissionais está pronta para oferecer uma experiência única, com procedimentos personalizados que garantem resultados satisfatórios. Não perca tempo e entre em contato conosco para agendar sua consulta. Estamos aqui para cuidar de você!",
+  "secoes": [
+    {
+      "titulo": "Atendimento Personalizado",
+      "conteudo": "Na nossa Clínica de Estética com WhatsApp em Ilhéus, entendemos que cada cliente é único. Por isso, oferecemos um atendimento totalmente personalizado, onde ouvimos suas necessidades e expectativas. Nossos profissionais são capacitados e experientes, prontos para criar um plano de tratamento que se encaixe perfeitamente ao seu perfil. Com a facilidade de contato pelo WhatsApp, você pode tirar suas dúvidas e agendar seu atendimento de forma rápida e prática, sem complicações."
+    },
+    {
+      "titulo": "Tratamentos Diversificados",
+      "conteudo": "Oferecemos uma ampla gama de tratamentos estéticos na Sirleia Souza - Beleza e Estética. Desde cuidados com a pele, como limpeza de pele e hidratação, até procedimentos mais complexos, como tratamentos para redução de medidas e rejuvenescimento facial. Todos os nossos serviços são realizados com equipamentos de última geração e produtos de alta qualidade, garantindo resultados eficazes e seguros. Entre em contato pelo WhatsApp e descubra qual tratamento é ideal para você!"
+    },
+    {
+      "titulo": "Facilidade e Praticidade no Agendamento",
+      "conteudo": "Compreendemos que a rotina pode ser corrida e, por isso, facilitamos o agendamento dos nossos serviços. Com a nossa Clínica de Estética com WhatsApp em Ilhéus, você pode marcar sua consulta a qualquer hora, onde estiver. Basta enviar uma mensagem e nossa equipe estará pronta para atendê-lo. Além disso, utilizamos o WhatsApp para enviar lembretes e dicas de cuidados, tornando sua experiência ainda mais prática e completa. Não deixe para depois, entre em contato agora mesmo!"
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Como posso agendar um atendimento na clínica?",
+      "resposta": "Para agendar um atendimento, basta enviar uma mensagem pelo WhatsApp. Nossa equipe irá responder rapidamente para confirmar seu agendamento."
+    },
+    {
+      "pergunta": "Quais tratamentos estéticos vocês oferecem?",
+      "resposta": "Oferecemos uma variedade de tratamentos, incluindo limpeza de pele, hidratação, redução de medidas, e rejuvenescimento facial."
+    },
+    {
+      "pergunta": "Posso tirar dúvidas sobre os tratamentos pelo WhatsApp?",
+      "resposta": "Sim! Você pode enviar suas dúvidas pelo WhatsApp e teremos prazer em responder e fornecer todas as informações necessárias."
+    },
+    {
+      "pergunta": "A clínica possui profissionais qualificados?",
+      "resposta": "Sim! Todos os nossos profissionais são altamente qualificados e possuem experiência na área de estética."
+    }
+  ],
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/sirleia-souza-beleza-e-estetica-ilheus/clinica-de-estetica-com-whatsapp-em-ilheus",
+    "name": "Clínica de Estética com WhatsApp",
+    "@type": "Service",
+    "@context": "https://schema.org",
+    "provider": {
+      "name": "Sirleia Souza - Beleza e Estética",
+      "@type": "LocalBusiness",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "BA",
+        "addressCountry": "BR",
+        "addressLocality": "Ilhéus"
+      }
+    },
+    "areaServed": "Ilhéus",
+    "description": "Descubra a Sirleia Souza - Beleza e Estética, sua Clínica de Estética com WhatsApp em Ilhéus. Atendimento personalizado e tratamentos diversificados para realçar sua beleza."
+  },
+  "meta_title": "Clínica de Estética com WhatsApp em Ilhéus - Sirleia Souza",
+  "meta_description": "Descubra a Sirleia Souza - Beleza e Estética, sua Clínica de Estética com WhatsApp em Ilhéus. Atendimento personalizado e tratamentos diversificados para realçar sua beleza.",
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-20T10:45:47.71006+00:00",
+  "updated_at": "2026-05-20T10:45:47.71006+00:00"
+}

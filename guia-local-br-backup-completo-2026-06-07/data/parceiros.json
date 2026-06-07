@@ -1,0 +1,50 @@
+[
+  {
+    "id": "ba384d1f-9274-4cbc-8c0a-3f4134c1b092",
+    "email": "ojulio.domingos@gmail.com",
+    "data_adicao": "2026-04-21T09:48:23.230632+00:00",
+    "convite_token": "8b25ed32ecf2ea3ad155f2f9c4ba02eb",
+    "nome": "Julio Domingos",
+    "nivel": "diamante",
+    "cota_premium": 150,
+    "cota_free": null,
+    "is_master": false,
+    "cidades_atendidas": [],
+    "slug": "julio-domingos",
+    "bio": null,
+    "avatar_url": null,
+    "whatsapp": null
+  },
+  {
+    "id": "f6815247-4b92-4be0-85d6-a28d146b1b79",
+    "email": "ziptemperos@gmail.com",
+    "data_adicao": "2026-04-21T09:52:27.448412+00:00",
+    "convite_token": "917d3bc47b2b0381db3203178c8897f7",
+    "nome": "Julio Domingos",
+    "nivel": "diamante",
+    "cota_premium": 150,
+    "cota_free": null,
+    "is_master": false,
+    "cidades_atendidas": [],
+    "slug": "julio-domingos-1",
+    "bio": null,
+    "avatar_url": null,
+    "whatsapp": null
+  },
+  {
+    "id": "176bbf9e-66ca-4502-8068-aea204a11065",
+    "email": "",
+    "data_adicao": "2026-05-17T13:36:50.524351+00:00",
+    "convite_token": "diamante-master-vip",
+    "nome": "Convite Mestre Diamante",
+    "nivel": "diamante",
+    "cota_premium": 150,
+    "cota_free": null,
+    "is_master": true,
+    "cidades_atendidas": [],
+    "slug": "convite-mestre-diamante",
+    "bio": null,
+    "avatar_url": null,
+    "whatsapp": null
+  }
+]

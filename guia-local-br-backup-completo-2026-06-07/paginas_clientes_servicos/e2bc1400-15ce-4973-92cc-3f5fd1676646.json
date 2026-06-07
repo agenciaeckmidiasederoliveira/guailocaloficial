@@ -1,0 +1,69 @@
+{
+  "id": "e2bc1400-15ce-4973-92cc-3f5fd1676646",
+  "page_id": "74301f0f-126a-401b-b98e-6ccc2b3925b5",
+  "business_id": "a2dfc360-199e-4e54-9bce-0d7a31fe02ad",
+  "slug_servico": "clinica-de-estetica-para-residencias-em-ilheus",
+  "servico_nome": "Clínica de Estética para residências",
+  "servico_descricao": "Soluções para clientes residenciais",
+  "cidade_alvo": "Ilhéus",
+  "status": "ativo",
+  "hero_titulo": "Transforme Sua Casa em um Oasis de Beleza",
+  "hero_subtitulo": "Clínica de Estética para Residências em Ilhéus",
+  "intro": "Na Sirleia Souza - Beleza e Estética, entendemos que cada cliente possui necessidades únicas quando se trata de cuidados com a beleza. Nossa Clínica de Estética para residências em Ilhéus oferece soluções personalizadas para que você possa desfrutar de tratamentos de qualidade no conforto do seu lar. Se você busca uma experiência única e relaxante, nossas profissionais altamente capacitadas estão prontas para trazer os melhores serviços de estética até sua casa. Desde tratamentos de pele a massagens relaxantes, garantimos resultados que vão transformar sua rotina de beleza. Descubra como podemos ajudar você a se sentir ainda mais confiante e radiante sem sair do conforto da sua residência!",
+  "secoes": [
+    {
+      "titulo": "Serviços Personalizados de Estética",
+      "conteudo": "Na nossa Clínica de Estética para residências em Ilhéus, oferecemos uma variedade de serviços que se adaptam às suas necessidades. Nossas esteticistas são treinadas para realizar procedimentos que vão desde limpeza de pele e hidratação facial até massagens terapêuticas e tratamentos corporais. Cada sessão é planejada de acordo com as preferências do cliente, utilizando produtos de alta qualidade que garantem resultados eficazes. O objetivo é proporcionar a você uma experiência rejuvenecedora, onde cada detalhe é pensado para trazer o máximo de conforto e satisfação."
+    },
+    {
+      "titulo": "Conforto e Praticidade na Sua Residência",
+      "conteudo": "Optar pela nossa Clínica de Estética para residências em Ilhéus significa escolher conveniência sem abrir mão da qualidade. Você não precisa mais se deslocar e enfrentar o trânsito para cuidar de sua beleza. Nossas profissionais vão até você, levando todo o equipamento e produtos necessários para realizar os tratamentos desejados. Isso torna o processo não apenas mais prático, mas também mais relaxante, permitindo que você aproveite cada momento de autocuidado em um ambiente familiar e acolhedor."
+    },
+    {
+      "titulo": "Resultados Visíveis e Satisfação Garantida",
+      "conteudo": "Na Sirleia Souza - Beleza e Estética, a satisfação do cliente é nossa prioridade. Trabalhamos com técnicas avançadas e produtos de alta performance para garantir que você veja resultados visíveis em pouco tempo. Nossas esteticistas estão sempre atualizadas com as últimas tendências e inovações no setor de beleza, assegurando que você receba o melhor atendimento possível. Ao escolher nossa Clínica de Estética para residências em Ilhéus, você está investindo em sua autoestima e bem-estar."
+    }
+  ],
+  "faq": [
+    {
+      "pergunta": "Quais serviços vocês oferecem na Clínica de Estética para residências em Ilhéus?",
+      "resposta": "Oferecemos uma ampla gama de serviços, incluindo limpeza de pele, tratamentos faciais, massagens relaxantes e tratamentos corporais personalizados."
+    },
+    {
+      "pergunta": "Como funcionam as sessões de atendimento?",
+      "resposta": "Nossas profissionais se deslocam até sua residência com todos os equipamentos e produtos necessários, garantindo um atendimento de qualidade e conforto."
+    },
+    {
+      "pergunta": "Os tratamentos são seguros e eficazes?",
+      "resposta": "Sim, trabalhamos com produtos de alta qualidade e técnicas comprovadas para garantir a segurança e eficácia dos tratamentos realizados."
+    },
+    {
+      "pergunta": "Posso agendar uma avaliação antes de iniciar os tratamentos?",
+      "resposta": "Sim, oferecemos uma avaliação inicial para entender suas necessidades e recomendar os melhores serviços para você."
+    }
+  ],
+  "schema_json": {
+    "url": "https://www.guialocalbr.com.br/sirleia-souza-beleza-e-estetica-ilheus/clinica-de-estetica-para-residencias-em-ilheus",
+    "name": "Clínica de Estética para residências",
+    "@type": "Service",
+    "@context": "https://schema.org",
+    "provider": {
+      "name": "Sirleia Souza - Beleza e Estética",
+      "@type": "LocalBusiness",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "BA",
+        "addressCountry": "BR",
+        "addressLocality": "Ilhéus"
+      }
+    },
+    "areaServed": "Ilhéus",
+    "description": "Descubra a Clínica de Estética para residências em Ilhéus da Sirleia Souza. Tratamentos personalizados de beleza no conforto do seu lar."
+  },
+  "meta_title": "Clínica de Estética para Residências em Ilhéus - Sirleia Souza",
+  "meta_description": "Descubra a Clínica de Estética para residências em Ilhéus da Sirleia Souza. Tratamentos personalizados de beleza no conforto do seu lar.",
+  "visualizacoes": 0,
+  "contatos_gerados": 0,
+  "created_at": "2026-05-20T10:46:26.987847+00:00",
+  "updated_at": "2026-05-20T10:46:26.987847+00:00"
+}
