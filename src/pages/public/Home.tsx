@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop, Home as HomeIcon, PawPrint, Pill, ShoppingCart, ArrowRight, ShieldCheck, Star, Calendar, Clock, Map, Building, Scissors, ShoppingBag, GraduationCap, Camera, Music, Dumbbell, Hammer, Briefcase, MoreHorizontal, Stethoscope } from 'lucide-react'
+import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop, Home as HomeIcon, PawPrint, Pill, ShoppingCart, ArrowRight, ShieldCheck, Star, Calendar, Clock, Map, Building, Scissors, ShoppingBag, GraduationCap, Camera, Music, Dumbbell, Hammer, Briefcase, MoreHorizontal, Stethoscope, MessageCircle } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { registrarEvento } from '../../lib/analytics'
 import { getTenantFromURL } from '../../lib/tenant'
@@ -37,6 +37,29 @@ const PLACEHOLDERS = [
   "Dentista em Curitiba...",
   "Pet Shop em Pouso Alegre...",
   "Advogado em Nova Aurora..."
+]
+
+const CIDADES_PADRAO = [
+  { nome: "São Paulo", estados: { uf: "SP" } },
+  { nome: "Rio de Janeiro", estados: { uf: "RJ" } },
+  { nome: "Belo Horizonte", estados: { uf: "MG" } },
+  { nome: "Curitiba", estados: { uf: "PR" } },
+  { nome: "Porto Alegre", estados: { uf: "RS" } },
+  { nome: "Salvador", estados: { uf: "BA" } },
+  { nome: "Fortaleza", estados: { uf: "CE" } },
+  { nome: "Brasília", estados: { uf: "DF" } },
+  { nome: "Recife", estados: { uf: "PE" } },
+  { nome: "Goiânia", estados: { uf: "GO" } },
+  { nome: "Campinas", estados: { uf: "SP" } },
+  { nome: "Maringá", estados: { uf: "PR" } },
+  { nome: "Pouso Alegre", estados: { uf: "MG" } },
+  { nome: "Vila Velha", estados: { uf: "ES" } },
+  { nome: "Petrópolis", estados: { uf: "RJ" } },
+  { nome: "Manaus", estados: { uf: "AM" } },
+  { nome: "Florianópolis", estados: { uf: "SC" } },
+  { nome: "Belém", estados: { uf: "PA" } },
+  { nome: "Vitória", estados: { uf: "ES" } },
+  { nome: "Natal", estados: { uf: "RN" } }
 ]
 
 export default function Home() {
@@ -92,12 +115,21 @@ export default function Home() {
 
       // Marquee Cidades
       const { data: mc } = await supabase.from('cidades').select('nome, estados(uf)').order('nome', { ascending: true }).limit(20)
-      setMarqueeCidades(mc || [])
+      let listCidades = mc ? [...mc] : [];
+      let idxPadrao = 0;
+      while (listCidades.length < 20 && idxPadrao < CIDADES_PADRAO.length) {
+        const cid = CIDADES_PADRAO[idxPadrao];
+        if (!listCidades.some(c => c.nome.toLowerCase() === cid.nome.toLowerCase())) {
+          listCidades.push(cid);
+        }
+        idxPadrao++;
+      }
+      setMarqueeCidades(listCidades)
 
       // Empresas em Destaque
       const { data: destaques } = await supabase
         .from('empresas')
-        .select('id, nome, slug, foto_principal, categorias(nome), cidades(nome, estados(uf))')
+        .select('id, nome, slug, foto_principal, plano, nicho, telefone, whatsapp, verificada, cidades(nome, estados(uf))')
         .eq('ativa', true)
         .order('score_completude', { ascending: false })
         .limit(10)
@@ -295,16 +327,15 @@ export default function Home() {
       </section>
 
       {/* MARQUEE CITIES */}
-      <div className="bg-white border-y border-[#EEF3F8] py-3 overflow-hidden flex items-center group">
-        <div className="flex w-max animate-[marquee_30s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 px-4">
-              {marqueeCidades.map((cidade, idx) => (
-                <span key={idx} className="flex items-center gap-2 text-[#5A6A7E] font-bold text-[13px] tracking-wide whitespace-nowrap">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#1A9B6A]" /> {cidade.nome} · {cidade.estados?.uf}
-                </span>
-              ))}
-            </div>
+      <div className="bg-white border-y border-[#EEF3F8] py-4 overflow-hidden relative group">
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10" />
+        <div className="flex w-max animate-[marquee_35s_linear_infinite] group-hover:[animation-play-state:paused] cursor-pointer">
+          {[...marqueeCidades, ...marqueeCidades].map((cidade, idx) => (
+            <span key={idx} className="flex items-center mx-6 text-[#0A1628] font-bold text-[13px] tracking-wide whitespace-nowrap bg-[#F8FAFC] hover:bg-[#E8F8F2] hover:text-[#1A9B6A] transition-all py-2 px-4 rounded-full border border-[#EEF3F8] flex-shrink-0">
+              <span className="w-2 h-2 rounded-full bg-[#1A9B6A] mr-2.5 shadow-[0_0_6px_rgba(26,155,106,0.5)] animate-pulse" />
+              {cidade.nome} · {cidade.estados?.uf}
+            </span>
           ))}
         </div>
       </div>
@@ -316,84 +347,215 @@ export default function Home() {
       `}</style>
 
       {/* STATS BAR */}
-      <div className="bg-white border-b border-[#EEF3F8]">
+      <div className="bg-gradient-to-r from-[#F0F7FF] to-[#E8F8F2] border-b border-[#EEF3F8]">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-[#EEF3F8] py-8">
-            <div className="text-center px-4">
-              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight">{counters.empresas}<span className="text-[#1A9B6A]">+</span></div>
-              <div className="text-[12px] text-[#9AAAB8] uppercase tracking-wide font-bold mt-1">Empresas cadastradas</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 py-10">
+            <div className="flex flex-col items-center p-6 bg-white/70 backdrop-blur rounded-2xl border border-white/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <div className="w-11 h-11 rounded-xl bg-[#1A9B6A]/10 flex items-center justify-center text-[#1A9B6A] mb-3">
+                <Building className="w-5 h-5" />
+              </div>
+              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight leading-none">{counters.empresas}<span className="text-[#1A9B6A]">+</span></div>
+              <div className="text-[11px] text-[#9AAAB8] uppercase tracking-wider font-bold mt-1.5">Empresas</div>
             </div>
-            <div className="text-center px-4">
-              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight">{counters.cidades}<span className="text-[#1A9B6A]">+</span></div>
-              <div className="text-[12px] text-[#9AAAB8] uppercase tracking-wide font-bold mt-1">Cidades atendidas</div>
+            <div className="flex flex-col items-center p-6 bg-white/70 backdrop-blur rounded-2xl border border-white/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <div className="w-11 h-11 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 mb-3">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight leading-none">{counters.cidades}<span className="text-[#1A9B6A]">+</span></div>
+              <div className="text-[11px] text-[#9AAAB8] uppercase tracking-wider font-bold mt-1.5">Cidades</div>
             </div>
-            <div className="text-center px-4 mt-8 md:mt-0">
-              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight">{counters.estados}<span className="text-[#1A9B6A]">+</span></div>
-              <div className="text-[12px] text-[#9AAAB8] uppercase tracking-wide font-bold mt-1">Estados cobertos</div>
+            <div className="flex flex-col items-center p-6 bg-white/70 backdrop-blur rounded-2xl border border-white/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <div className="w-11 h-11 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-3">
+                <Map className="w-5 h-5" />
+              </div>
+              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight leading-none">{counters.estados}<span className="text-[#1A9B6A]">+</span></div>
+              <div className="text-[11px] text-[#9AAAB8] uppercase tracking-wider font-bold mt-1.5">Estados</div>
             </div>
-            <div className="text-center px-4 mt-8 md:mt-0">
-              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight">{counters.premium}<span className="text-[#1A9B6A]">+</span></div>
-              <div className="text-[12px] text-[#9AAAB8] uppercase tracking-wide font-bold mt-1">Membros premium</div>
+            <div className="flex flex-col items-center p-6 bg-white/70 backdrop-blur rounded-2xl border border-white/80 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all">
+              <div className="w-11 h-11 rounded-xl bg-amber-100 flex items-center justify-center text-amber-500 mb-3">
+                <Star className="w-5 h-5" />
+              </div>
+              <div className="text-[32px] font-[900] text-[#0A1628] tracking-tight leading-none">{counters.premium}<span className="text-[#1A9B6A]">+</span></div>
+              <div className="text-[11px] text-[#9AAAB8] uppercase tracking-wider font-bold mt-1.5">Premium</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* EXPLORE CATEGORIES */}
-      <section className="py-20 bg-[#F8FAFC]">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-[28px] md:text-[36px] font-[900] text-[#0A1628] mb-2 tracking-tight">
-            Explore por <span className="text-[#1A9B6A]">Categoria</span>
-          </h2>
-          <p className="text-[#9AAAB8] text-[15px] font-medium mb-12">
-            Encontre rapidamente o que você precisa
-          </p>
+      <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-72 h-72 bg-emerald-50 rounded-full filter blur-3xl opacity-60 -z-10" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-50 rounded-full filter blur-3xl opacity-60 -z-10" />
+        <div className="container mx-auto px-4 max-w-7xl relative z-10">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#EEF3F8] shadow-sm mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#1A9B6A] animate-pulse" />
+              <span className="text-[10px] font-black text-[#1A9B6A] uppercase tracking-widest">Explore por Segmento</span>
+            </div>
+            <h2 className="text-[28px] md:text-[36px] font-[900] text-[#0A1628] mb-2 tracking-tight">
+              Explore por <span className="bg-gradient-to-r from-[#1A9B6A] to-[#0D6EE0] bg-clip-text text-transparent">Categoria</span>
+            </h2>
+            <p className="text-[#9AAAB8] text-[15px] font-medium max-w-md mx-auto">
+              Encontre rapidamente o negócio certo para cada necessidade
+            </p>
+          </div>
 
-          <div className="grid grid-cols-4 md:grid-cols-9 gap-[10px] max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3 max-w-[1200px] mx-auto">
             {CATEGORIAS.map((cat, idx) => {
               const Icon = cat.icone
+              const gradients = [
+                'from-orange-400 to-red-400','from-pink-400 to-fuchsia-400','from-blue-400 to-indigo-400',
+                'from-purple-400 to-violet-400','from-red-400 to-rose-400','from-emerald-400 to-teal-400',
+                'from-amber-400 to-yellow-400','from-slate-400 to-gray-500','from-indigo-400 to-blue-400',
+                'from-violet-400 to-purple-500','from-lime-400 to-green-400','from-cyan-400 to-sky-400',
+                'from-yellow-400 to-amber-500','from-teal-400 to-emerald-500','from-sky-400 to-blue-500',
+                'from-fuchsia-400 to-pink-500','from-green-400 to-emerald-400','from-gray-400 to-slate-400',
+              ]
+              const bg = [
+                'bg-orange-50','bg-pink-50','bg-blue-50','bg-purple-50','bg-red-50','bg-emerald-50',
+                'bg-amber-50','bg-slate-50','bg-indigo-50','bg-violet-50','bg-lime-50','bg-cyan-50',
+                'bg-yellow-50','bg-teal-50','bg-sky-50','bg-fuchsia-50','bg-green-50','bg-gray-50',
+              ]
+              const borders = [
+                'border-orange-100 hover:border-orange-300','border-pink-100 hover:border-pink-300',
+                'border-blue-100 hover:border-blue-300','border-purple-100 hover:border-purple-300',
+                'border-red-100 hover:border-red-300','border-emerald-100 hover:border-emerald-300',
+                'border-amber-100 hover:border-amber-300','border-slate-100 hover:border-slate-300',
+                'border-indigo-100 hover:border-indigo-300','border-violet-100 hover:border-violet-300',
+                'border-lime-100 hover:border-lime-300','border-cyan-100 hover:border-cyan-300',
+                'border-yellow-100 hover:border-yellow-300','border-teal-100 hover:border-teal-300',
+                'border-sky-100 hover:border-sky-300','border-fuchsia-100 hover:border-fuchsia-300',
+                'border-green-100 hover:border-green-300','border-gray-100 hover:border-gray-300',
+              ]
+              const textCols = [
+                'text-orange-600','text-pink-600','text-blue-600','text-purple-600','text-red-600','text-emerald-600',
+                'text-amber-600','text-slate-600','text-indigo-600','text-violet-600','text-lime-600','text-cyan-600',
+                'text-yellow-600','text-teal-600','text-sky-600','text-fuchsia-600','text-green-600','text-gray-600',
+              ]
+              const g = gradients[idx % gradients.length]
+              const b = bg[idx % bg.length]
+              const bo = borders[idx % borders.length]
+              const t = textCols[idx % textCols.length]
               return (
                 <Link
                   key={idx}
                   to={`/busca?categoria=${cat.slug}`}
-                  className="group flex flex-col items-center justify-center p-4 bg-white border-[1.5px] border-[#EEF3F8] rounded-[16px] hover:border-[#1A9B6A] hover:-translate-y-[2px] hover:shadow-[0_6px_20px_rgba(26,155,106,0.1)] transition-all duration-300"
+                  className={`group flex flex-col items-center gap-2.5 p-3 md:p-4 ${b} border ${bo} rounded-2xl hover:-translate-y-2 hover:shadow-lg transition-all duration-300 cursor-pointer`}
                 >
-                  <div className={`w-12 h-12 rounded-[14px] ${cat.cor} flex items-center justify-center mb-3`}>
-                    <Icon className="w-6 h-6" strokeWidth={1.5} />
+                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${g} flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:shadow-md transition-all duration-300`}>
+                    <Icon className="w-5 h-5 text-white" strokeWidth={1.8} />
                   </div>
-                  <h3 className="font-semibold text-[#0A1628] text-[12px] text-center group-hover:text-[#1A9B6A] transition-colors leading-tight">{cat.nome}</h3>
+                  <h3 className={`font-bold ${t} text-[10px] md:text-[11px] text-center leading-tight line-clamp-2 transition-colors`}>{cat.nome}</h3>
                 </Link>
               )
             })}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link
+              to="/busca"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-[#EEF3F8] text-[#5A6A7E] font-bold text-[13px] hover:border-[#1A9B6A] hover:text-[#1A9B6A] hover:shadow-md transition-all duration-300"
+            >
+              Ver todas as categorias
+              <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
       {/* EMPRESAS EM DESTAQUE */}
-      <section className="py-20 bg-[linear-gradient(180deg,#F0F7FF,#ffffff)] border-y border-[#EEF3F8]">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="flex flex-col md:flex-row md:items-center justify-between mb-10">
-            <div className="flex items-center gap-4">
-              <h2 className="text-[28px] font-[900] text-[#0A1628] tracking-tight">Empresas em <span className="text-[#1A9B6A]">Destaque</span></h2>
+      <section className="py-20 bg-gradient-to-b from-[#F0F7FF] to-white relative overflow-hidden">
+        <div className="absolute right-0 top-1/4 w-96 h-96 bg-emerald-50 rounded-full filter blur-3xl opacity-70 -z-10" />
+        <div className="absolute left-0 bottom-1/4 w-80 h-80 bg-amber-50 rounded-full filter blur-3xl opacity-70 -z-10" />
+        <div className="container mx-auto px-4 max-w-7xl">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase tracking-wider mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Vagas rotativas
+              </div>
+              <h2 className="text-[28px] md:text-[36px] font-[900] text-[#0A1628] tracking-tight leading-tight">
+                Empresas em <span className="bg-gradient-to-r from-[#1A9B6A] to-[#0D6EE0] bg-clip-text text-transparent">Destaque</span>
+              </h2>
+              <p className="text-[#9AAAB8] text-[14px] font-medium mt-1">Negócios verificados prontos para atendê-lo agora</p>
             </div>
-            <Link to="/busca?destaque=true" className="text-[#1A9B6A] text-[14px] font-bold flex items-center gap-1 hover:underline mt-4 md:mt-0">
-              Ver todas <ArrowRight className="w-4 h-4" />
+            <Link to="/busca?destaque=true" className="text-[#1A9B6A] text-[14px] font-bold flex items-center gap-1 hover:underline flex-shrink-0">
+              Ver todos os destaques <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
           <div className="relative overflow-hidden w-full group">
-            <div className="flex w-max gap-5 animate-[marquee_40s_linear_infinite] hover:[animation-play-state:paused] pb-4">
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#F0F7FF] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+            <div className="flex w-max gap-6 animate-[marquee_45s_linear_infinite] hover:[animation-play-state:paused] pb-6 pt-2">
               {[...empresasDestaque, ...empresasDestaque].map((empresa, idx) => {
-                const mappedEmpresa = {
-                  ...empresa,
-                  cidade: empresa?.cidades?.nome || '',
-                  estado: empresa?.cidades?.estados?.uf || ''
-                };
+                const isPremium = empresa?.plano === 'premium';
                 return (
-                  <div key={idx} className="w-[280px] flex-shrink-0">
-                    <EmpresaCard empresa={mappedEmpresa as any} />
-                  </div>
-                )
+                  <Link
+                    key={idx}
+                    to={`/empresa/${empresa.slug || empresa.id}`}
+                    className={`w-[290px] flex-shrink-0 bg-white rounded-3xl overflow-hidden flex flex-col group/card transition-all duration-300 hover:-translate-y-2 cursor-pointer ${
+                      isPremium
+                        ? 'border-2 border-amber-400/80 shadow-[0_12px_30px_-10px_rgba(245,158,11,0.25)] hover:shadow-[0_20px_40px_-10px_rgba(245,158,11,0.4)]'
+                        : 'border border-[#EEF3F8] shadow-[0_10px_25px_-8px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_-8px_rgba(0,0,0,0.12)]'
+                    }`}
+                  >
+                    <div className="relative h-[160px] overflow-hidden bg-slate-100">
+                      {empresa.foto_principal ? (
+                        <>
+                          <img
+                            src={empresa.foto_principal}
+                            alt={empresa.nome}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                        </>
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#1A9B6A]/10 to-[#0D6EE0]/10">
+                          <span className="text-5xl font-black bg-gradient-to-br from-[#1A9B6A] to-[#0D6EE0] bg-clip-text text-transparent opacity-30">
+                            {empresa.nome?.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                      {isPremium && (
+                        <span className="absolute top-3 left-3 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
+                          ⭐ Premium
+                        </span>
+                      )}
+                      {empresa.nicho && (
+                        <span className="absolute bottom-3 left-3 text-[10px] font-bold text-white bg-[#1A9B6A]/90 backdrop-blur-sm py-1 px-2.5 rounded-full shadow-sm">
+                          {empresa.nicho}
+                        </span>
+                      )}
+                    </div>
+                    <div className="p-5 flex flex-col flex-grow">
+                      <h3 className="font-[900] text-[#0A1628] text-[15px] leading-snug mb-1 line-clamp-2 group-hover/card:text-[#1A9B6A] transition-colors">
+                        {empresa.nome}
+                      </h3>
+                      <div className="flex items-center text-[#9AAAB8] text-[12px] font-semibold mb-3">
+                        <MapPin className="w-3.5 h-3.5 mr-1 flex-shrink-0" />
+                        <span className="truncate">{empresa?.cidades?.nome || empresa?.cidade} · {empresa?.cidades?.estados?.uf || empresa?.estado}</span>
+                      </div>
+                      <div className="flex gap-0.5 text-amber-400 mb-auto">
+                        {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
+                        <span className="text-[11px] text-[#9AAAB8] ml-1 mt-0.5">(5.0)</span>
+                      </div>
+                      {empresa.whatsapp && (
+                        <div className="mt-4 pt-4 border-t border-[#EEF3F8]" onClick={(e) => e.preventDefault()}>
+                          <a
+                            href={`https://wa.me/55${empresa.whatsapp?.replace(/\D/g, '')}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="w-full flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-[12px] py-2.5 rounded-2xl transition-all hover:shadow-[0_8px_20px_-6px_rgba(16,185,129,0.5)]"
+                          >
+                            <MessageCircle className="w-4 h-4" />
+                            Conversar no WhatsApp
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                );
               })}
             </div>
           </div>
