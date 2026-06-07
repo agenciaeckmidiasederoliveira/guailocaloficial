@@ -29,20 +29,156 @@ export function AdminZipRestore() {
     else console.log(message);
   };
 
+// --- Mapping helpers ---
+  const slugify = (text: string) => {
+    if (!text) return '';
+    return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-').replace(/-+/g, '-');
+  };
+
   const processTableBatch = async (tableName: string, rows: any[], batchSize = 50) => {
     let successCount = 0;
     let errorCount = 0;
     
+    // Process mapping caches per-batch
+    const estadoCache: Record<string, string> = {};
+    const cidadeCache: Record<string, string> = {};
+    const categoriaCache: Record<string, string> = {};
+
+    const getOrCreateEstado = async (uf: string) => {
+      if (!uf) return null;
+      uf = uf.toUpperCase();
+      if (estadoCache[uf]) return estadoCache[uf];
+      
+      const ESTADOS_BR: any = { 'AC':'Acre','AL':'Alagoas','AP':'Amapá','AM':'Amazonas','BA':'Bahia','CE':'Ceará','DF':'Distrito Federal','ES':'Espírito Santo','GO':'Goiás','MA':'Maranhão','MT':'Mato Grosso','MS':'Mato Grosso do Sul','MG':'Minas Gerais','PA':'Pará','PB':'Paraíba','PR':'Paraná','PE':'Pernambuco','PI':'Piauí','RJ':'Rio de Janeiro','RN':'Rio Grande do Norte','RS':'Rio Grande do Sul','RO':'Rondônia','RR':'Roraima','SC':'Santa Catarina','SP':'São Paulo','SE':'Sergipe','TO':'Tocantins' };
+      const nome = ESTADOS_BR[uf] || uf;
+      const slug = slugify(nome);
+      
+      const { data: existing } = await supabase.from('estados').select('id').eq('uf', uf).maybeSingle();
+      if (existing) { estadoCache[uf] = existing.id; return existing.id; }
+      
+      const { data: novo } = await supabase.from('estados').upsert({ uf, nome, slug }, { onConflict: 'slug' }).select('id').maybeSingle();
+      if (novo) estadoCache[uf] = novo.id;
+      return novo ? novo.id : null;
+    };
+
+    const getOrCreateCidade = async (nomeCidade: string, uf: string) => {
+      if (!nomeCidade || !uf) return null;
+      const cacheKey = `${nomeCidade}-${uf}`.toLowerCase();
+      if (cidadeCache[cacheKey]) return cidadeCache[cacheKey];
+      
+      const estadoId = await getOrCreateEstado(uf);
+      if (!estadoId) return null;
+      
+      const slug = slugify(nomeCidade) + '-' + uf.toLowerCase();
+      const { data: existing } = await supabase.from('cidades').select('id').eq('slug', slug).maybeSingle();
+      if (existing) { cidadeCache[cacheKey] = existing.id; return existing.id; }
+      
+      const { data: novo } = await supabase.from('cidades').upsert({ nome: nomeCidade, estado_id: estadoId, slug }, { onConflict: 'slug' }).select('id').maybeSingle();
+      if (novo) cidadeCache[cacheKey] = novo.id;
+      return novo ? novo.id : null;
+    };
+
+    const getOrCreateCategoria = async (nicho: string) => {
+      if (!nicho) return null;
+      const name = nicho.trim();
+      const slug = slugify(name);
+      if (categoriaCache[slug]) return categoriaCache[slug];
+      
+      const { data: existing } = await supabase.from('categorias').select('id').eq('slug', slug).maybeSingle();
+      if (existing) { categoriaCache[slug] = existing.id; return existing.id; }
+      
+      const { data: novo } = await supabase.from('categorias').upsert({ nome: name, slug }, { onConflict: 'slug' }).select('id').maybeSingle();
+      if (novo) categoriaCache[slug] = novo.id;
+      return novo ? novo.id : null;
+    };
+
     for (let i = 0; i < rows.length; i += batchSize) {
-      const batch = rows.slice(i, i + batchSize);
+      let batch = rows.slice(i, i + batchSize);
+      
+      if (tableName === 'empresas') {
+        for (const row of batch) {
+           if (row.cidade && row.estado) row.cidade_id = await getOrCreateCidade(row.cidade, row.estado);
+           if (row.nicho) row.categoria_id = await getOrCreateCategoria(row.nicho);
+        }
+      }
+
+      batch = batch.map(row => {
+        const newRow = { ...row };
+        if (tableName === 'profiles') {
+           if (newRow.created_at) { newRow.criado_em = newRow.created_at; delete newRow.created_at; }
+           if (!newRow.nome) newRow.nome = "Sem Nome";
+        }
+        if (tableName === 'empresas') {
+           delete newRow.bairros; delete newRow.fotos_adicionais; delete newRow.videos;
+           delete newRow.meta_description; delete newRow.data_expiracao_destaque; 
+           delete newRow.imported_at; delete newRow.usuario_id;
+           delete newRow.cidade; delete newRow.estado; delete newRow.nicho;
+           
+           if (newRow.plano === 'free') newRow.plano = 'gratis';
+           if (newRow.faq !== undefined) { newRow.faqs = newRow.faq; delete newRow.faq; }
+           if (newRow.created_at) { newRow.criado_em = newRow.created_at; delete newRow.created_at; }
+           if (newRow.data_cadastro) { newRow.criado_em = newRow.data_cadastro; delete newRow.data_cadastro; }
+        }
+        if (tableName === 'parceiros') {
+           // Fix syntax issue for enum types or integers mapped to strings
+           if (newRow.plano === 'diamante') newRow.plano = 1; // Example mapping, usually safe to delete if invalid
+           else if (typeof newRow.plano === 'string') delete newRow.plano; 
+        }
+        if (tableName === 'blog_posts') { delete newRow.tags; delete newRow.visualizacoes; }
+        if (tableName === 'client_pages' && newRow.created_at) { newRow.criado_em = newRow.created_at; delete newRow.created_at; }
+        return newRow;
+      });
+
+      if (tableName === 'profiles' || tableName === 'user_roles') {
+        return { successCount: 0, errorCount: rows.length }; // skip
+      }
+
       try {
         const query = supabase.from(tableName as any);
-        const { error } = mode === "upsert" 
-          ? await query.upsert(batch) 
-          : await query.insert(batch);
+        const { error } = mode === "upsert" ? await query.upsert(batch) : await query.insert(batch);
           
-        if (error) throw error;
-        successCount += batch.length;
+        if (error) {
+          if (error.message && error.message.includes("Could not find the table")) {
+             return { successCount: 0, errorCount: rows.length };
+          }
+
+          // Auto-heal logic
+          for (let row of batch) {
+            let retry = true;
+            let currentRow = { ...row };
+            let attempts = 0;
+            
+            while (retry && attempts < 10) {
+              attempts++;
+              const { error: singleError } = mode === "upsert" 
+                ? await supabase.from(tableName as any).upsert(currentRow)
+                : await supabase.from(tableName as any).insert(currentRow);
+
+              if (singleError) {
+                 const msg = singleError.message;
+                 const match = msg.match(/Could not find the '([^']+)' column/);
+                 if (match && match[1]) {
+                    delete currentRow[match[1]];
+                    continue; // auto-heal: remove missing col and retry
+                 }
+                 if (msg.includes("violates unique constraint") && msg.includes("slug")) {
+                    currentRow.slug = currentRow.slug + '-' + Math.floor(Math.random() * 1000);
+                    continue; // auto-heal: randomize slug
+                 }
+                 if (!msg.includes("Could not find the table")) {
+                   addLog(`Erro ${tableName} (ID: ${currentRow.id?.slice(0,6)}): ${msg}`, 'error');
+                 }
+                 errorCount++;
+                 retry = false;
+              } else {
+                 successCount++;
+                 retry = false;
+              }
+            }
+          }
+        } else {
+          successCount += batch.length;
+        }
       } catch (e: any) {
         errorCount += batch.length;
         addLog(`Erro lote ${tableName}: ${e.message}`, 'error');
