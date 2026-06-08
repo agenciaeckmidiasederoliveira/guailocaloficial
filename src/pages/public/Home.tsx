@@ -7,22 +7,22 @@ import './Home.css';
 
 // Fixed categories that match the filter list in Busca.tsx
 const CATS = [
-  { n: "Alimentação", e: "🍽️", bg: "#FFF3E0", c: "#E07B00", slug: "Restaurantes" },
-  { n: "Beleza e Estética", e: "💆", bg: "#FEE8F2", c: "#C2185B", slug: "Beleza & Estética" },
-  { n: "Automotivo", e: "🚗", bg: "#EBF5FF", c: "#1565C0", slug: "Automóveis" },
+  { n: "Alimentação", e: "🍽️", bg: "#FFF3E0", c: "#E07B00", slug: "Alimentação" },
+  { n: "Beleza e Estética", e: "💆", bg: "#FEE8F2", c: "#C2185B", slug: "Beleza e Estética" },
+  { n: "Automotivo", e: "🚗", bg: "#EBF5FF", c: "#1565C0", slug: "Automotivo" },
   { n: "Saúde", e: "🏥", bg: "#F0EEFF", c: "#512DA8", slug: "Saúde" },
-  { n: "Pet Shop", e: "🐾", bg: "#E8F8F2", c: "#2E7D32", slug: "Pets" },
-  { n: "Disk Gás", e: "🔥", bg: "#FFFAE0", c: "#E65100", slug: "Serviços" },
-  { n: "Jurídico", e: "⚖️", bg: "#EEEEFF", c: "#311B92", slug: "Serviços" },
+  { n: "Pet Shop", e: "🐾", bg: "#E8F8F2", c: "#2E7D32", slug: "Pet Shop" },
+  { n: "Disk Gás", e: "🔥", bg: "#FFFAE0", c: "#E65100", slug: "Depósito de Gás" },
+  { n: "Jurídico", e: "⚖️", bg: "#EEEEFF", c: "#311B92", slug: "Advocacia" },
   { n: "Tecnologia", e: "💻", bg: "#EBF5FF", c: "#0D47A1", slug: "Tecnologia" },
-  { n: "Moda", e: "👗", bg: "#F5EEFF", c: "#6A1B9A", slug: "Lojas & Comércio" },
-  { n: "Decoração", e: "🏠", bg: "#E8F8F2", c: "#00695C", slug: "Imobiliárias" },
-  { n: "Construção", e: "🏗️", bg: "#EEEEFF", c: "#283593", slug: "Serviços" },
-  { n: "Supermercado", e: "🛒", bg: "#E4F6EE", c: "#1B5E20", slug: "Lojas & Comércio" },
-  { n: "Serviços", e: "🛠️", bg: "#F0F4C3", c: "#827717", slug: "Serviços" },
+  { n: "Moda", e: "👗", bg: "#F5EEFF", c: "#6A1B9A", slug: "Moda" },
+  { n: "Decoração", e: "🏠", bg: "#E8F8F2", c: "#00695C", slug: "Casa e Decoração" },
+  { n: "Construção", e: "🏗️", bg: "#EEEEFF", c: "#283593", slug: "Construção" },
+  { n: "Supermercado", e: "🛒", bg: "#E4F6EE", c: "#1B5E20", slug: "Supermercado" },
+  { n: "Serviços", e: "🛠️", bg: "#F0F4C3", c: "#827717", slug: "Serviços Gerais" },
   { n: "Educação", e: "📚", bg: "#E1F5FE", c: "#0277BD", slug: "Educação" },
-  { n: "Imóveis", e: "🏡", bg: "#F3E5F5", c: "#4A148C", slug: "Imobiliárias" },
-  { n: "Eventos", e: "🎉", bg: "#FFF8E1", c: "#F57F17", slug: "Restaurantes" }
+  { n: "Imóveis", e: "🏡", bg: "#F3E5F5", c: "#4A148C", slug: "Imobiliário" },
+  { n: "Eventos", e: "🎉", bg: "#FFF8E1", c: "#F57F17", slug: "Eventos e Festas" }
 ];
 
 const DEFAULT_BANNERS = [
