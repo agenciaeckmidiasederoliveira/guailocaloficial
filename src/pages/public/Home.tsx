@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop, Home as HomeIcon, PawPrint, Pill, ShoppingCart, ArrowRight, ShieldCheck, Star, Calendar, Clock, Map, Building, Scissors, ShoppingBag, GraduationCap, Camera, Music, Dumbbell, Hammer, Briefcase, MoreHorizontal, Stethoscope, MessageCircle } from 'lucide-react'
+import { Search, MapPin, Zap, Utensils, Heart, Car, Book, Shirt, Wrench, Laptop, Home as HomeIcon, PawPrint, Pill, ShoppingCart, ArrowRight, ShieldCheck, Star, Calendar, Clock, Map, Building, Scissors, ShoppingBag, GraduationCap, Camera, Music, Dumbbell, Hammer, Briefcase, MoreHorizontal, Stethoscope, MessageCircle, LocateFixed } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { registrarEvento } from '../../lib/analytics'
 import { getTenantFromURL } from '../../lib/tenant'
@@ -79,6 +79,7 @@ export default function Home() {
   const [placeholderIdx, setPlaceholderIdx] = useState(0)
   const [counters, setCounters] = useState({ empresas: 0, cidades: 0, estados: 0, premium: 0 })
   const [finalCounters, setFinalCounters] = useState({ empresas: 49, cidades: 16, estados: 8, premium: 34 })
+  const [userLocationStr, setUserLocationStr] = useState('')
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -90,6 +91,26 @@ export default function Home() {
   useEffect(() => {
     registrarEvento('page_view', { origem: 'home' })
     void carregarDadosIniciais()
+
+    // Detectar cidade automaticamente via GPS
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        try {
+          const { latitude, longitude } = pos.coords
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`)
+          const data = await res.json()
+          const cidade = data.address?.city || data.address?.town || data.address?.village || data.address?.municipality
+          if (cidade) {
+            setUserLocationStr(cidade)
+            setTermoBusca(prev => prev ? prev : cidade)
+          }
+        } catch (err) {
+          console.error('Erro geolocalização', err)
+        }
+      }, () => {
+        console.log('Geolocalização não permitida ou indisponível.')
+      })
+    }
   }, [])
 
   const carregarDadosIniciais = async () => {
@@ -275,6 +296,12 @@ export default function Home() {
           
           {/* BUSCA */}
           <div className="max-w-[700px] mx-auto relative mb-6">
+            {userLocationStr && (
+              <div className="flex items-center justify-center gap-1.5 mb-3 text-[13px] text-[#1A9B6A] font-medium animate-fade-in">
+                <LocateFixed className="w-4 h-4" />
+                <span>Encontramos você em: <strong>{userLocationStr}</strong></span>
+              </div>
+            )}
             <form onSubmit={handleSearch} className="relative flex items-center bg-white border-[1.5px] border-[#D0EAE0] rounded-[14px] p-2 shadow-[0_4px_20px_rgba(26,155,106,0.12)] transition-all">
               <div className="flex-1 flex items-center pl-4">
                 <Search className="w-5 h-5 text-[#1A9B6A] mr-3 flex-shrink-0" />
