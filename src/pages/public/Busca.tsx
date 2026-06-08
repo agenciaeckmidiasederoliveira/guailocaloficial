@@ -29,9 +29,12 @@ export default function Busca() {
   const page = parseInt(searchParams.get('page') || '1')
   const PER_PAGE = 24
 
+  const [categoriasList, setCategoriasList] = useState<any[]>([])
+
   useEffect(() => {
     void getTenantFromURL().then(setTenant)
     supabase.from('estados').select('*').order('nome').then(({ data }) => setEstados(data || []))
+    supabase.from('categorias').select('*').then(({ data }) => setCategoriasList(data || []))
   }, [])
 
   useEffect(() => {
@@ -52,7 +55,57 @@ export default function Busca() {
       if (tenant?.id) query = query.eq('tenant_id', tenant.id)
 
       if (q) query = query.ilike('nome', `%${q}%`)
-      if (categoria) query = query.eq('categoria_id_fixa', categoria) // fallback search
+      
+      if (categoria && categoriasList.length > 0) {
+        const matchingCatIds = categoriasList
+          .filter(c => {
+            const name = (c.nome || '').toLowerCase();
+            const filter = categoria.toLowerCase();
+            
+            if (filter === 'restaurantes') {
+              return name.includes('restaurante') || name.includes('pizza') || name.includes('hamburguer') || name.includes('alimenta') || name.includes('gourmet') || name.includes('bebida') || name.includes('doce') || name.includes('carne') || name.includes('conveniencia');
+            }
+            if (filter === 'beleza & estética') {
+              return name.includes('beleza') || name.includes('estética') || name.includes('estetica') || name.includes('salão') || name.includes('salao') || name.includes('unha') || name.includes('cabelo') || name.includes('micro');
+            }
+            if (filter === 'saúde') {
+              return name.includes('saúde') || name.includes('saude') || name.includes('odonto') || name.includes('dentista') || name.includes('médic') || name.includes('medic') || name.includes('clínica') || name.includes('clinica') || name.includes('farmácia') || name.includes('farmacia');
+            }
+            if (filter === 'automóveis') {
+              return name.includes('auto') || name.includes('car') || name.includes('veículo') || name.includes('moto') || name.includes('guincho') || name.includes('borracha') || name.includes('lava') || name.includes('pneu') || name.includes('oficina') || name.includes('mecânic') || name.includes('mecanic');
+            }
+            if (filter === 'pets') {
+              return name.includes('pet') || name.includes('animal') || name.includes('cão') || name.includes('gato') || name.includes('veterinári') || name.includes('veterinari') || name.includes('banho') || name.includes('tosa');
+            }
+            if (filter === 'serviços') {
+              return name.includes('serviço') || name.includes('limpeza') || name.includes('pint') || name.includes('constru') || name.includes('depósito') || name.includes('entreg') || name.includes('frete') || name.includes('gás') || name.includes('gas') || name.includes('chave');
+            }
+            if (filter === 'lojas & comércio') {
+              return name.includes('loja') || name.includes('comércio') || name.includes('comercio') || name.includes('varejo') || name.includes('venda') || name.includes('supermercado') || name.includes('mercad') || name.includes('horti') || name.includes('moda') || name.includes('roupa') || name.includes('sapato') || name.includes('acessório') || name.includes('acessorio') || name.includes('perfum');
+            }
+            if (filter === 'tecnologia') {
+              return name.includes('tecnologia') || name.includes('computa') || name.includes('celular') || name.includes('internet') || name.includes('ti') || name.includes('desenvolvi') || name.includes('software') || name.includes('telecom');
+            }
+            if (filter === 'imobiliárias') {
+              return name.includes('imóvel') || name.includes('imovel') || name.includes('imobili') || name.includes('casa') || name.includes('apart') || name.includes('alug') || name.includes('corretor');
+            }
+            if (filter === 'turismo') {
+              return name.includes('turismo') || name.includes('viagem') || name.includes('hotel') || name.includes('pousada') || name.includes('lazer');
+            }
+            if (filter === 'educação') {
+              return name.includes('educa') || name.includes('escola') || name.includes('curso') || name.includes('facul') || name.includes('aprend');
+            }
+            return name === filter || name.includes(filter);
+          })
+          .map(c => c.id);
+
+        if (matchingCatIds.length > 0) {
+          query = query.in('categoria_id', matchingCatIds);
+        } else {
+          query = query.eq('categoria_id', '00000000-0000-0000-0000-000000000000');
+        }
+      }
+      
       if (cidadeId) query = query.eq('cidade_id', cidadeId)
       
       if (ordenar === 'score') query = query.order('score_completude', { ascending: false })
@@ -61,7 +114,6 @@ export default function Busca() {
       query = query.range((page - 1) * PER_PAGE, page * PER_PAGE - 1)
       const { data, count } = await query
       
-      // Simulação sort Premium primeiro
       const sorted = (data || []).sort((a, b) => {
          if (a.plano === 'premium' && b.plano !== 'premium') return -1;
          if (b.plano === 'premium' && a.plano !== 'premium') return 1;
@@ -70,8 +122,10 @@ export default function Busca() {
 
       setEmpresas(sorted)
       setTotal(count || 0)
+    } catch (err) {
+      console.error(err);
     } finally { setLoading(false) }
-  }, [q, categoria, cidadeId, estadoId, ordenar, page, tenant?.id])
+  }, [q, categoria, cidadeId, estadoId, ordenar, page, tenant?.id, categoriasList])
 
   useEffect(() => { buscar() }, [buscar])
 
