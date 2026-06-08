@@ -150,23 +150,23 @@ export default function Home() {
       // Empresas em Destaque
       const { data: destaques } = await supabase
         .from('empresas')
-        .select('id, nome, slug, foto_principal, plano, nicho, telefone, whatsapp, verificada, cidades(nome, estados(uf))')
-        .eq('ativa', true)
+        .select('id, nome, slug, foto_principal, plano, nicho, telefone, whatsapp, cidades(nome, estados(uf))')
+        .eq('status', 'aprovado')
         .order('score_completude', { ascending: false })
         .limit(10)
       setEmpresasDestaque(destaques || [])
 
       // Estatísticas reais
-      const { data: stats } = await supabase.from('empresas').select('ativa, plano, cidades(id, estados(id))')
+      const { data: statsData } = await supabase.from('empresas').select('status, plano, cidades(id, estados(id))')
       
-      let empresasAtivas = 0
+      let empresasAprovadas = 0
       let empresasPremium = 0
       const cidadesSet = new Set()
       const estadosSet = new Set()
 
-      if (stats) {
-        stats.forEach((e: any) => {
-          if (e.ativa) empresasAtivas++
+      if (statsData) {
+        statsData.forEach((e: any) => {
+          if (e.status === 'aprovado') empresasAprovadas++
           if (e.plano === 'premium' || e.plano === 'turbo') empresasPremium++
           if (e.cidades) {
             cidadesSet.add(e.cidades.id)
@@ -176,10 +176,10 @@ export default function Home() {
       }
 
       setFinalCounters({
-        empresas: empresasAtivas || 49,
-        cidades: cidadesSet.size || 16,
-        estados: estadosSet.size || 8,
-        premium: empresasPremium || 34
+        empresas: empresasAprovadas > 0 ? empresasAprovadas : 49,
+        cidades: cidadesSet.size > 0 ? cidadesSet.size : 16,
+        estados: estadosSet.size > 0 ? estadosSet.size : 8,
+        premium: empresasPremium > 0 ? empresasPremium : 34
       })
 
     } catch (error) {
@@ -262,10 +262,10 @@ export default function Home() {
             <Link to="/sobre" className="text-[13px] font-medium text-[#5A6A7E] hover:text-[#1A9B6A] transition-colors">
               Como funciona
             </Link>
-            <Link to="/entrar" className="px-5 py-2 rounded-lg border-[1.5px] border-[#1A9B6A] text-[#1A9B6A] text-[13px] font-bold hover:bg-[#1A9B6A] hover:text-white transition-all">
+            <Link to="/auth" className="px-5 py-2 rounded-lg border-[1.5px] border-[#1A9B6A] text-[#1A9B6A] text-[13px] font-bold hover:bg-[#1A9B6A] hover:text-white transition-all">
               Entrar
             </Link>
-            <Link to="/cadastre-sua-empresa" className="px-5 py-2.5 rounded-lg bg-[#1A9B6A] text-white text-[13px] font-bold hover:bg-[#147A53] transition-all">
+            <Link to="/cadastro" className="px-5 py-2.5 rounded-lg bg-[#1A9B6A] text-white text-[13px] font-bold hover:bg-[#147A53] transition-all">
               Cadastre Grátis
             </Link>
           </div>
@@ -693,10 +693,10 @@ export default function Home() {
             Coloque seu negócio na frente de milhares de clientes locais de forma totalmente gratuita e multiplique suas vendas.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link to="/cadastre-sua-empresa" className="w-full sm:w-auto bg-[#1A9B6A] text-white font-bold px-8 py-4 rounded-xl text-[15px] hover:bg-[#147A53] transition-colors shadow-[0_4px_20px_rgba(26,155,106,0.3)]">
+            <Link to="/cadastro" className="w-full sm:w-auto bg-[#1A9B6A] text-white font-bold px-8 py-4 rounded-xl text-[15px] hover:bg-[#147A53] transition-colors shadow-[0_4px_20px_rgba(26,155,106,0.3)]">
               Cadastrar Minha Empresa
             </Link>
-            <Link to="/entrar" className="w-full sm:w-auto bg-transparent border-[1.5px] border-white/20 text-white font-bold px-8 py-4 rounded-xl text-[15px] hover:bg-white/5 transition-colors">
+            <Link to="/planos" className="w-full sm:w-auto bg-transparent border-[1.5px] border-white/20 text-white font-bold px-8 py-4 rounded-xl text-[15px] hover:bg-white/5 transition-colors">
               Conhecer Plano Premium
             </Link>
           </div>
@@ -757,10 +757,10 @@ export default function Home() {
             <div>
               <h4 className="text-[11px] font-black text-white uppercase tracking-[1.5px] mb-5">Parcerias</h4>
               <ul className="space-y-3 text-[14px] font-medium">
-                <li><Link to="/cadastre-sua-empresa" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Anunciar Negócio</Link></li>
-                <li><Link to="/seja-parceiro" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Seja um Parceiro</Link></li>
+                <li><Link to="/cadastro" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Anunciar Negócio</Link></li>
+                <li><Link to="/parceiro" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Seja um Parceiro</Link></li>
 
-                <li><Link to="/seja-parceiro" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Programa de Parceiros</Link></li>
+                <li><Link to="/parceiros" className="text-[rgba(255,255,255,0.5)] hover:text-[#1A9B6A] transition-colors">Programa de Parceiros</Link></li>
               </ul>
             </div>
 

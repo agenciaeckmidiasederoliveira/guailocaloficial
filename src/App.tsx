@@ -10,7 +10,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { LoadingSpinner } from "@/components/LoadingSpinner";
 
 // Rotas críticas (eager) - carregam imediatamente
-import Index from "./pages/Index";
+import Home from "./pages/public/Home";
 import Auth from "./pages/Auth";
 import Busca from "./pages/Busca";
 import NotFound from "./pages/NotFound";
@@ -91,7 +91,7 @@ const App = () => (
               <Sonner />
               <Suspense fallback={<PageFallback />}>
                 <Routes>
-                  <Route path="/" element={<Index />} />
+                  <Route path="/" element={<Home />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
                   <Route path="/busca" element={<Busca />} />

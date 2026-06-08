@@ -300,7 +300,7 @@ export function AdminDashboard() {
       { count: totalCadastros },
       { count: sessionsUnicas },
     ] = await Promise.all([
-      supabase.from("empresas").select("*", { count: "exact", head: true }),
+      supabase.from("empresas").select("*", { count: "exact", head: true }).eq("status", "aprovado"),
       supabase.from("empresas").select("*", { count: "exact", head: true }).eq("plano", "premium"),
       supabase.from("empresas").select("*", { count: "exact", head: true }).eq("status", "pendente"),
       supabase.from("analytics_events").select("*", { count: "exact", head: true }).eq("tipo", "page_view").gte("created_at", `${startDate}T00:00:00`),
@@ -684,7 +684,7 @@ export function AdminDashboard() {
   ];
 
   const statCards = [
-    { title: "Total Empresas", value: stats.totalEmpresas, icon: Building2, color: "text-primary" },
+    { title: "Empresas Ativas", value: stats.totalEmpresas, icon: Building2, color: "text-primary" },
     { title: "Premium", value: stats.empresasPremium, icon: TrendingUp, color: "text-amber-500" },
     { title: "Pendentes", value: stats.empresasPendentes, icon: Users, color: "text-orange-500" },
     { title: "Visualizações", value: stats.totalVisualizacoes, icon: Eye, color: "text-blue-500", variation: viewsVariation },
