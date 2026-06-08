@@ -625,7 +625,7 @@ export default function Home() {
             <div 
               key={idx} 
               className="cat" 
-              onClick={() => navigate(`/busca?categoria=${encodeURIComponent(c.slug)}`)}
+              onClick={() => navigate(`/busca?nicho=${encodeURIComponent(c.slug)}`)}
             >
               <div className="catic" style={{ background: c.bg }}>
                 <span>{c.e}</span>
