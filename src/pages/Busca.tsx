@@ -27,7 +27,7 @@ import { ESTADOS_BR, NICHOS } from "@/lib/constants";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { isEmpresaAberta } from "@/lib/utils";
 import { getTenantFromURL, type Tenant } from "@/lib/tenant";
-import { Search, MapPin, Filter, Loader2, Clock, SlidersHorizontal } from "lucide-react";
+import { Search, MapPin, Filter, Loader2, Clock, SlidersHorizontal, Star, Crown, Navigation, ZoomIn, ZoomOut, Layers, Building2 } from "lucide-react";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useSEO } from "@/hooks/useSEO";
 
@@ -63,6 +63,12 @@ export default function Busca() {
   const [hasMore, setHasMore] = useState(true);
   const [hasTracked, setHasTracked] = useState(false);
   const [geoApplied, setGeoApplied] = useState(false);
+
+  // Overhaul states
+  const [hoveredEmpresaId, setHoveredEmpresaId] = useState<string | null>(null);
+  const [selectedMapEmpresa, setSelectedMapEmpresa] = useState<Empresa | null>(null);
+  const [onlyPremiumFilter, setOnlyPremiumFilter] = useState(false);
+  const [minRatingFilter, setMinRatingFilter] = useState<number | null>(null);
 
   // Read filters from URL
   const searchTerm = searchParams.get("q") || "";
@@ -362,6 +368,26 @@ export default function Busca() {
               />
             </div>
 
+            <Button
+              variant={onlyPremiumFilter ? "default" : "outline"}
+              size="sm"
+              onClick={() => setOnlyPremiumFilter(prev => !prev)}
+              className="h-10 flex items-center gap-1.5"
+            >
+              <Crown className={`h-4 w-4 ${onlyPremiumFilter ? 'text-amber-300 fill-amber-300' : 'text-amber-500'}`} />
+              Somente Premium
+            </Button>
+
+            <Button
+              variant={minRatingFilter === 4 ? "default" : "outline"}
+              size="sm"
+              onClick={() => setMinRatingFilter(prev => prev === 4 ? null : 4)}
+              className="h-10 flex items-center gap-1.5"
+            >
+              <Star className={`h-4 w-4 ${minRatingFilter === 4 ? 'text-amber-300 fill-amber-300' : 'text-amber-500'}`} />
+              4★ ou mais
+            </Button>
+
             {hasActiveFilters && (
               <Button variant="ghost" size="sm" onClick={clearFilters} className="h-10 touch-target">
                 <Filter className="mr-2 h-4 w-4" />
@@ -371,47 +397,199 @@ export default function Busca() {
           </div>
         </div>
 
-        {/* Results */}
-        {!loading && empresas.length > 0 && (
-          <p className="mb-4 text-sm text-muted-foreground">
-            {empresas.length} empresa{empresas.length !== 1 ? "s" : ""} encontrada{empresas.length !== 1 ? "s" : ""}
-          </p>
-        )}
+        {/* Filter local items */}
+        {(() => {
+          const matchingItems = empresas.filter(e => {
+            if (onlyPremiumFilter && e.plano !== 'premium') return false;
+            return true;
+          });
 
-        <div aria-live="polite" aria-atomic="true">
-          {loading && empresas.length === 0 ? (
-            <div className="flex items-center justify-center py-16">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              <span className="sr-only">Carregando empresas...</span>
-            </div>
-          ) : empresas.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-border py-16 text-center">
-              <p className="text-lg text-muted-foreground">
-                Nenhuma empresa encontrada com os filtros selecionados.
-              </p>
-              <Button variant="outline" onClick={clearFilters} className="mt-4">
-                Limpar Filtros
-              </Button>
-            </div>
-          ) : (
-            <>
-              <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {empresas.map((empresa) => (
-                  <EmpresaCard key={empresa.id} empresa={empresa} />
-                ))}
+          const getSimulatedCoords = (idx: number) => {
+            const positions = [
+              { top: '25%', left: '35%' },
+              { top: '45%', left: '55%' },
+              { top: '30%', left: '70%' },
+              { top: '65%', left: '40%' },
+              { top: '55%', left: '20%' },
+              { top: '70%', left: '65%' },
+              { top: '20%', left: '60%' },
+              { top: '80%', left: '45%' },
+              { top: '35%', left: '15%' },
+              { top: '50%', left: '80%' },
+              { top: '15%', left: '45%' },
+              { top: '60%', left: '75%' },
+            ];
+            return positions[idx % positions.length];
+          };
+
+          return (
+            <div className="flex flex-col lg:flex-row gap-6 items-stretch min-h-[500px]">
+              {/* Left Column: Results List */}
+              <div className="flex-1 space-y-4">
+                {!loading && matchingItems.length > 0 && (
+                  <p className="text-sm text-muted-foreground font-medium">
+                    {matchingItems.length} empresa{matchingItems.length !== 1 ? "s" : ""} encontrada{matchingItems.length !== 1 ? "s" : ""}
+                  </p>
+                )}
+
+                <div aria-live="polite" aria-atomic="true">
+                  {loading && matchingItems.length === 0 ? (
+                    <div className="flex items-center justify-center py-16">
+                      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+                      <span className="sr-only">Carregando empresas...</span>
+                    </div>
+                  ) : matchingItems.length === 0 ? (
+                    <div className="rounded-xl border border-dashed border-border py-16 text-center bg-card">
+                      <p className="text-lg text-muted-foreground">
+                        Nenhuma empresa encontrada com os filtros selecionados.
+                      </p>
+                      <Button variant="outline" onClick={() => { clearFilters(); setOnlyPremiumFilter(false); setMinRatingFilter(null); }} className="mt-4">
+                        Limpar Filtros
+                      </Button>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2">
+                        {matchingItems.map((emp) => (
+                          <div
+                            key={emp.id}
+                            onMouseEnter={() => setHoveredEmpresaId(emp.id)}
+                            onMouseLeave={() => setHoveredEmpresaId(null)}
+                            className={`transition-all duration-200 rounded-xl ${
+                              hoveredEmpresaId === emp.id ? 'ring-2 ring-primary ring-offset-2' : ''
+                            }`}
+                          >
+                            <EmpresaCard empresa={emp} />
+                          </div>
+                        ))}
+                      </div>
+
+                      {hasMore && (
+                        <div className="mt-8 text-center">
+                          <Button variant="outline" onClick={loadMore} disabled={loading} className="min-h-[44px]">
+                            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                            Carregar Mais
+                          </Button>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
 
-              {hasMore && (
-                <div className="mt-8 text-center">
-                  <Button variant="outline" onClick={loadMore} disabled={loading} className="min-h-[44px]">
-                    {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                    Carregar Mais
-                  </Button>
+              {/* Right Column: Simulated Interactive Map */}
+              <div className="hidden lg:block w-[420px] bg-slate-100 dark:bg-slate-950 border border-border/80 dark:border-slate-800 rounded-2xl relative overflow-hidden shadow-inner sticky top-24 h-[600px]">
+                {/* Map Grid overlay */}
+                <div className="absolute inset-0 opacity-15 dark:opacity-5 pointer-events-none" style={{
+                  backgroundImage: 'radial-gradient(circle, #000 1px, transparent 1px), linear-gradient(0deg, transparent 24%, #000 25%, #000 26%, transparent 27%, transparent 74%, #000 75%, #000 76%, transparent 77%), linear-gradient(90deg, transparent 24%, #000 25%, #000 26%, transparent 27%, transparent 74%, #000 75%, #000 76%, transparent 77%)',
+                  backgroundSize: '20px 20px, 100px 100px, 100px 100px'
+                }}></div>
+
+                {/* Map Controls */}
+                <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5">
+                  <div className="bg-white dark:bg-slate-900 border border-border/80 dark:border-slate-800 rounded-lg p-1 shadow-md flex flex-col">
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><ZoomIn className="h-4 w-4" /></Button>
+                    <Button variant="ghost" size="icon" className="h-8 w-8 border-t border-border/40 dark:border-slate-800/40"><ZoomOut className="h-4 w-4" /></Button>
+                  </div>
+                  <div className="bg-white dark:bg-slate-900 border border-border/80 dark:border-slate-800 rounded-lg p-1 shadow-md">
+                    <Button variant="ghost" size="icon" className="h-8 w-8"><Layers className="h-4 w-4" /></Button>
+                  </div>
                 </div>
-              )}
-            </>
-          )}
-        </div>
+
+                <div className="absolute top-4 right-4 z-10 bg-white/90 dark:bg-slate-900/90 backdrop-blur border border-border/80 dark:border-slate-800 rounded-lg px-3 py-1.5 shadow-md flex items-center gap-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200">
+                  <Navigation className="h-3.5 w-3.5 text-primary animate-pulse" />
+                  <span>Mapa de {cidade || "Negócios Locais"}</span>
+                </div>
+
+                {/* Map pins */}
+                {!loading && matchingItems.map((emp, idx) => {
+                  const coords = getSimulatedCoords(idx);
+                  const isHovered = hoveredEmpresaId === emp.id || selectedMapEmpresa?.id === emp.id;
+                  const isPremium = emp.plano === 'premium' || emp.plano === 'turbo';
+
+                  return (
+                    <div
+                      key={emp.id}
+                      className="absolute z-20 transition-all duration-200 cursor-pointer"
+                      style={{
+                        top: coords.top,
+                        left: coords.left,
+                        transform: 'translate(-50%, -100%)'
+                      }}
+                      onClick={() => setSelectedMapEmpresa(emp)}
+                      onMouseEnter={() => setHoveredEmpresaId(emp.id)}
+                      onMouseLeave={() => setHoveredEmpresaId(null)}
+                    >
+                      <div className="relative flex flex-col items-center">
+                        {/* Pin body */}
+                        <div className={`h-8 w-8 rounded-full flex items-center justify-center border-2 shadow-md transition-all ${
+                          isHovered 
+                            ? 'bg-primary border-white scale-125 z-30' 
+                            : isPremium 
+                              ? 'bg-amber-500 border-white text-white' 
+                              : 'bg-white dark:bg-slate-800 border-primary text-primary'
+                        }`}>
+                          {isPremium ? (
+                            <Crown className={`h-4 w-4 ${isHovered ? 'text-white' : 'text-amber-100'}`} />
+                          ) : (
+                            <Building2 className="h-4 w-4" />
+                          )}
+                        </div>
+                        {/* Pin pointer */}
+                        <div className={`w-2 h-2 rotate-45 -mt-1 shadow-sm ${
+                          isHovered ? 'bg-primary' : isPremium ? 'bg-amber-500' : 'bg-white dark:bg-slate-800'
+                        }`}></div>
+
+                        {/* Hover label */}
+                        {isHovered && (
+                          <div className="absolute top-full mt-2 bg-slate-950 text-white text-[10px] px-2 py-1 rounded shadow-md font-semibold whitespace-nowrap z-50">
+                            {emp.nome}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {/* Selected Map Card Popover */}
+                {selectedMapEmpresa && (
+                  <div className="absolute bottom-4 left-4 right-4 bg-white dark:bg-slate-900 border border-border/80 dark:border-slate-800 rounded-xl p-3 shadow-xl z-30 flex gap-3 animate-fade-in-up">
+                    {selectedMapEmpresa.foto_principal ? (
+                      <img
+                        src={selectedMapEmpresa.foto_principal}
+                        alt={selectedMapEmpresa.nome}
+                        className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
+                      />
+                    ) : (
+                      <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-2xl flex-shrink-0">🏢</div>
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-bold text-sm text-slate-900 dark:text-white truncate">{selectedMapEmpresa.nome}</h4>
+                      <p className="text-xs text-muted-foreground truncate">{selectedMapEmpresa.nicho}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 truncate">📍 {selectedMapEmpresa.endereco}</p>
+                      <div className="mt-2 flex items-center justify-between">
+                        <Link
+                          to={`/empresa/${selectedMapEmpresa.slug || selectedMapEmpresa.id}`}
+                          className="text-[11px] font-bold text-primary hover:underline flex items-center gap-0.5"
+                        >
+                          Ver perfil completo →
+                        </Link>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setSelectedMapEmpresa(null)}
+                          className="h-6 px-2 text-xs text-muted-foreground"
+                        >
+                          Fechar
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </Layout>
   );

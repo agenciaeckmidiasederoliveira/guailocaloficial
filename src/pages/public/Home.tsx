@@ -4,6 +4,7 @@ import { supabase } from '../../lib/supabase';
 import { registrarEvento } from '../../lib/analytics';
 import { getTenantFromURL } from '../../lib/tenant';
 import './Home.css';
+import { Search, MapPin, Sparkles, Bell, ChevronRight, Star, Heart, ExternalLink, Calendar } from 'lucide-react';
 
 // Fixed categories that match the filter list in Busca.tsx
 const CATS = [
@@ -103,6 +104,17 @@ const MQ_CITIES = [
   "Londrina · PR"
 ];
 
+const SIMULATED_ACTIVITIES = [
+  { emoji: "💬", txt: "Roberto iniciou contato via WhatsApp com di Domenico Casa (Maringá · PR)" },
+  { emoji: "📞", txt: "Ana ligou para Alkazar Disk Pizza (Paiçandu · PR)" },
+  { emoji: "⭐", txt: "Carlos avaliou MR Clínica de Estética com 5 estrelas (Curitiba · PR)" },
+  { emoji: "🚗", txt: "Marcos buscou por Guincho 24h em Sarandi · PR" },
+  { emoji: "🍽️", txt: "Júlia visualizou o cardápio do Restaurante da Déia (Pouso Alegre · MG)" },
+  { emoji: "💆", txt: "Letícia agendou estética com Sirleia Souza (Ilhéus · BA)" },
+  { emoji: "🔥", txt: "Felipe pediu gás na Viva Gás Maringá (Maringá · PR)" },
+  { emoji: "🏢", txt: "Nova empresa registrada: Evolution Car em Sarandi · PR" }
+];
+
 export default function Home() {
   const navigate = useNavigate();
   const [termoBusca, setTermoBusca] = useState('');
@@ -116,6 +128,14 @@ export default function Home() {
   const [cidades, setCidades] = useState<any[]>([]);
   const [artigos, setArtigos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Autocomplete suggestions
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [filteredCats, setFilteredCats] = useState<any[]>([]);
+  const [filteredCids, setFilteredCids] = useState<any[]>([]);
+
+  // Ticker activity
+  const [currentActivityIdx, setCurrentActivityIdx] = useState(0);
 
   // Banners carousel state
   const [bannerIdx, setBannerIdx] = useState(0);
@@ -147,6 +167,32 @@ export default function Home() {
     }, 3200);
     return () => clearInterval(interval);
   }, []);
+
+  // Rotate simulated activities
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentActivityIdx(prev => (prev + 1) % SIMULATED_ACTIVITIES.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Update autocomplete suggestions
+  useEffect(() => {
+    if (!termoBusca.trim()) {
+      setFilteredCats([]);
+      setFilteredCids([]);
+      return;
+    }
+    const term = termoBusca.toLowerCase();
+    
+    // Filter categories
+    const matchingCats = CATS.filter(c => c.n.toLowerCase().includes(term) || c.slug.toLowerCase().includes(term)).slice(0, 4);
+    setFilteredCats(matchingCats);
+
+    // Filter cities
+    const matchingCids = cidades.filter(c => c.nome.toLowerCase().includes(term)).slice(0, 4);
+    setFilteredCids(matchingCids);
+  }, [termoBusca, cidades]);
 
   // Auto-advance banners slider
   useEffect(() => {
@@ -405,9 +451,14 @@ export default function Home() {
     }
 
     const isFavorite = favorites.includes(emp.id);
+    const isPremium = emp.plano === 'premium' || emp.plano === 'turbo';
 
     return (
-      <div key={emp.id} className="ecard" onClick={() => navigate(`/empresa/${emp.slug}`)}>
+      <div 
+        key={emp.id} 
+        className={`ecard animate-hover-float ${isPremium ? 'premium-card-glow border-amber-500/40 shadow-premium' : ''} dark:bg-slate-900 dark:border-slate-800`} 
+        onClick={() => navigate(`/empresa/${emp.slug}`)}
+      >
         <div className="ecard-top">
           <div className="ebadge-row">
             {emp.plano === 'premium' || emp.plano === 'turbo' ? (
@@ -541,27 +592,99 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section className="hero">
+      <section className="hero bg-gradient-shift bg-gradient-to-br from-slate-50 via-teal-50/20 to-blue-50/30 dark:from-slate-950 dark:via-emerald-950/10 dark:to-slate-900 border-b border-border/40">
         <div className="hero-grid"></div>
-        <div className="hero-glow"></div>
+        <div className="hero-glow animate-pulse-slow"></div>
         <div className="hero-inner">
-          <div className="hbadge"><div className="hdot"></div>O MAIOR GUIA COMERCIAL DO BRASIL</div>
-          <h1>Encontre os Melhores<br/>Negócios <span className="grad">Locais</span><br/>da Sua Região</h1>
-          <p className="hero-sub">Conecte-se com empresas verificadas e fale diretamente pelo WhatsApp — rápido, gratuito e seguro.</p>
+          <div className="hbadge shadow-sm dark:bg-slate-900 dark:border-slate-800 dark:text-emerald-400">
+            <div className="hdot bg-emerald-500"></div>
+            O MAIOR GUIA COMERCIAL DO BRASIL
+          </div>
+          <h1 className="dark:text-white">Encontre os Melhores<br/>Negócios <span className="grad">Locais</span><br/>da Sua Região</h1>
+          <p className="hero-sub dark:text-slate-300">Conecte-se com empresas verificadas e fale diretamente pelo WhatsApp — rápido, gratuito e seguro.</p>
           
-          <form onSubmit={handleSearch} className="sbox">
-            <div className="sico">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <div className="relative max-w-xl mx-auto z-30 mb-6">
+            <form onSubmit={handleSearch} className="sbox glass-panel shadow-premium border-primary/20 flex items-center relative z-20 dark:bg-slate-900/90 dark:border-slate-800">
+              <div className="sico text-primary dark:text-emerald-500">
+                <Search className="h-5 w-5" />
+              </div>
+              <input 
+                id="sinp" 
+                type="text" 
+                placeholder={PLACEHOLDERS[placeholderIdx]} 
+                value={termoBusca}
+                onChange={(e) => setTermoBusca(e.target.value)}
+                onFocus={() => setShowSuggestions(true)}
+                onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
+                className="bg-transparent dark:text-white"
+              />
+              <button type="submit" className="sbtn bg-gradient-to-r from-primary to-secondary dark:from-emerald-600 dark:to-blue-700">Buscar Agora</button>
+            </form>
+
+            {/* Suggestions Autocomplete */}
+            {showSuggestions && (filteredCats.length > 0 || filteredCids.length > 0) && (
+              <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 border border-border/80 dark:border-slate-800 rounded-xl shadow-lg z-50 overflow-hidden text-left py-2">
+                {filteredCats.length > 0 && (
+                  <div className="px-4 py-2 border-b border-border/50 dark:border-slate-800/50">
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                      <Sparkles className="h-3 w-3 text-amber-500" /> Categorias
+                    </span>
+                    <div className="mt-1 space-y-1">
+                      {filteredCats.map(c => (
+                        <button
+                          key={c.slug}
+                          type="button"
+                          onMouseDown={() => {
+                            setTermoBusca(c.n);
+                            navigate(`/busca?nicho=${encodeURIComponent(c.slug)}`);
+                          }}
+                          className="w-full text-left px-2 py-1.5 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg flex items-center justify-between"
+                        >
+                          <span className="flex items-center gap-2"><span>{c.e}</span> {c.n}</span>
+                          <ChevronRight className="h-3 w-3 text-muted-foreground" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {filteredCids.length > 0 && (
+                  <div className="px-4 py-2">
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                      <MapPin className="h-3 w-3 text-primary" /> Cidades
+                    </span>
+                    <div className="mt-1 space-y-1">
+                      {filteredCids.map(c => (
+                        <button
+                          key={c.id}
+                          type="button"
+                          onMouseDown={() => {
+                            setTermoBusca(c.nome);
+                            navigate(`/busca?q=${encodeURIComponent(c.nome)}`);
+                          }}
+                          className="w-full text-left px-2 py-1.5 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg flex items-center justify-between"
+                        >
+                          <span>📍 {c.nome} - {c.uf}</span>
+                          <ChevronRight className="h-3 w-3 text-muted-foreground" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Simulated Activity Ticker */}
+          <div className="mb-8 inline-flex items-center justify-center">
+            <div className="glass-panel text-xs md:text-sm px-4 py-2 rounded-full border border-primary/10 shadow-sm flex items-center gap-2 text-primary dark:text-emerald-400 font-semibold animate-pulse-slow dark:bg-slate-900/60 dark:border-slate-800">
+              <Bell className="h-4 w-4 animate-bounce text-amber-500" />
+              <span className="text-muted-foreground font-normal">Atividade recente:</span>
+              <span className="inline-flex items-center gap-1 text-slate-800 dark:text-emerald-300">
+                <span>{SIMULATED_ACTIVITIES[currentActivityIdx].emoji}</span>
+                <span>{SIMULATED_ACTIVITIES[currentActivityIdx].txt}</span>
+              </span>
             </div>
-            <input 
-              id="sinp" 
-              type="text" 
-              placeholder={PLACEHOLDERS[placeholderIdx]} 
-              value={termoBusca}
-              onChange={(e) => setTermoBusca(e.target.value)}
-            />
-            <button type="submit" className="sbtn">Buscar Agora</button>
-          </form>
+          </div>
 
           <div className="stags">
             <span className="stag">Buscas comuns:</span>

@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Menu, X, User, LogOut, Settings, Heart, Crown, Sparkles, BarChart3 } from "lucide-react";
+import { Menu, X, User, LogOut, Settings, Heart, Crown, Sparkles, BarChart3, Sun, Moon } from "lucide-react";
 import logotipo from "@/assets/logotipo.png";
 import { useState, useEffect } from "react";
 import {
@@ -17,6 +17,21 @@ export function Header() {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -64,6 +79,16 @@ export function Header() {
 
         {/* Actions */}
         <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
+            className="rounded-full mr-1 text-muted-foreground hover:text-foreground"
+            aria-label="Alternar Tema"
+          >
+            {theme === 'light' ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5 text-amber-400" />}
+          </Button>
+
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
